@@ -1,0 +1,90 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  username  String   @unique
+  steamId   String?  @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profile            Profile?
+  sentMessages       Message[]            @relation("SentMessages")
+  UserOnConversation UserOnConversation[]
+  MessageReadReceipt MessageReadReceipt[]
+}
+
+model Profile {
+  id                 Int      @id @default(autoincrement())
+  userId             Int      @unique
+  sex                SexType?
+  bio                String?
+  avatarUrl          String?
+  platform           String?
+  availability       String?
+  age                Int?
+  favouritePlatform  String?
+  availablePlatforms String[] @default([])
+  favouriteGames     String[] @default([])
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+enum SexType {
+  MALE
+  FEMALE
+}
+
+model Message {
+  id             Int      @id @default(autoincrement())
+  content        String
+  senderId       Int
+  conversationId Int
+  createdAt      DateTime @default(now())
+
+  sender       User                 @relation("SentMessages", fields: [senderId], references: [id])
+  conversation Conversation         @relation(fields: [conversationId], references: [id])
+  readReceipts MessageReadReceipt[]
+
+  @@index([conversationId])
+}
+
+model Conversation {
+  id           Int                  @id @default(autoincrement())
+  createdAt    DateTime             @default(now())
+  messages     Message[]
+  participants UserOnConversation[]
+
+  @@index([id])
+}
+
+model UserOnConversation {
+  userId         Int
+  conversationId Int
+  joinedAt       DateTime @default(now())
+
+  user         User         @relation(fields: [userId], references: [id])
+  conversation Conversation @relation(fields: [conversationId], references: [id])
+
+  @@unique([userId, conversationId])
+}
+
+model MessageReadReceipt {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  messageId Int
+  readAt    DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id])
+  message Message @relation(fields: [messageId], references: [id])
+
+  @@unique([userId, messageId])
+}

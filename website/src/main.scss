@@ -1,0 +1,22 @@
+label {
+  margin-right: 0.5rem;
+}
+
+.linear {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #0b1d2d, #0b2428);
+  color: white;
+}

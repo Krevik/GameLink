@@ -1,0 +1,66 @@
+/* Variables */
+:root {
+  --primary-color: #1e88e5;
+  --secondary-color: #1565c0;
+  --hover-color: #0d47a1;
+  --logout-color: #d32f2f;
+  --logout-hover-color: #b71c1c;
+  --navbar-height: 60px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--navbar-height);
+  padding: 0 20px;
+  background: linear-gradient(45deg, var(--primary-color) 30%, var(--secondary-color) 90%);
+  box-shadow: 0 3px 5px 2px rgba(33, 203, 243, 0.3);
+  color: white;
+}
+
+.navbar-brand {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 15px;
+}
+
+.navbar-item {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.navbar-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.container {
+  padding: 20px;
+}
+
+.p-button-danger {
+  background-color: var(--logout-color) !important;
+  border-color: var(--logout-color) !important;
+  color: white !important;
+  text-transform: none !important;
+  transition: background-color 0.3s ease !important;
+}
+
+.p-button-danger:hover {
+  background-color: var(--logout-hover-color) !important;
+  border-color: var(--logout-hover-color) !important;
+}
+
