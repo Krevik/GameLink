@@ -1,6 +1,6 @@
 import React from "react";
 import "./ConversationList.css";
-import { Conversation, setSelectedConversationId } from "../../../store/messagesSlice.ts";
+import { Conversation, setSelectedConversationId } from "../../../store/slices/messagesSlice.ts";
 import { AppState } from "../../../store/store.ts";
 import { useSelector } from "react-redux";
 import { ListBox, ListBoxChangeEvent } from "primereact/listbox";

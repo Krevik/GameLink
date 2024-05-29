@@ -3,7 +3,7 @@ import ConversationList from "./ConversationList/ConversationList.tsx";
 import React, { ReactElement, useEffect } from "react";
 import { useSelector } from "react-redux";
 import store, { AppState } from "../../store/store.ts";
-import { Conversation, MessagesState, setAreMessagesOpen, setConversations, setSelectedConversationId } from "../../store/messagesSlice.ts";
+import { Conversation, MessagesState, setAreMessagesOpen, setConversations, setSelectedConversationId } from "../../store/slices/messagesSlice.ts";
 import { Button } from "primereact/button";
 import "./MessagesComponent.css";
 import axiosInstance from "../../api/axiosConfig.ts";

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setAccessToken, setUserId } from "../store/authSlice";
+import { setAccessToken, setUserId } from "../store/slices/authSlice.ts";
 import axios from "axios";
 import { Container, TextField, Button, Typography, Link, Box, Paper } from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";

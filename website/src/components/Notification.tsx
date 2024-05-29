@@ -2,7 +2,7 @@ import React from "react";
 import { Snackbar, Alert } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../store/store";
-import { removeNotification } from "../store/notificationSlice";
+import { removeNotification } from "../store/slices/notificationSlice.ts";
 
 const Notification: React.FC = () => {
     const notifications = useSelector((state: AppState) => state.notifications.notifications);

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
 import "./Layout.css";
 import store from "../../store/store.ts";
-import { clearAccessToken, clearUserId } from "../../store/authSlice.ts";
+import { clearAccessToken, clearUserId } from "../../store/slices/authSlice.ts";
 import { translate } from "../../utils/translation/TranslationUtils.ts";
 import { PagePaths } from "../../utils/pagePaths.ts";
 import { MessagesComponent } from "../Messages/MessagesComponent.tsx";

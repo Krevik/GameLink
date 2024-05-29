@@ -3,7 +3,7 @@ import "./MessageList.css";
 import MessageBubble from "../MessageBubble/MessageBubble.tsx";
 import axiosInstance from "../../../api/axiosConfig.ts";
 import { Button } from "primereact/button";
-import { Conversation } from "../../../store/messagesSlice.ts";
+import { Conversation } from "../../../store/slices/messagesSlice.ts";
 
 interface MessageListProps {
     conversationId: number;
