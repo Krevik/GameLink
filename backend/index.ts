@@ -12,6 +12,7 @@ import path from "node:path";
 import fs from "fs";
 import { authRoutes } from "./src/routes/authRoutes";
 import { conversationRoutes } from "./src/routes/conversationRoutes";
+import { CommandResult } from "./src/utils/CommandResult";
 
 export const prisma = new PrismaClient();
 const serverApp: Express = express();
@@ -53,13 +54,13 @@ const upload = multer({
 //TODO move to controller, cut out special chars from filename
 serverApp.post(`/profiles/uploadProfilePicture/:userId`, upload.single("file"), async (req, res) => {
     if (!req.file) {
-        return res.status(400).send("No file uploaded.");
+        return res.status(400).send(CommandResult.failure("NO_FILE_UPLOADED"));
     }
 
     const filePath: string = `/uploads/profilePictures/${req.file.filename}`;
     const { userId } = req.params;
     if (!userId) {
-        return res.status(400).send("No userId given.");
+        return res.status(400).send(CommandResult.failure("NO_USER_ID_GIVEN"));
     }
     try {
         await prisma.profile.update({
@@ -82,7 +83,7 @@ serverApp.post(`/profiles/uploadProfilePicture/:userId`, upload.single("file"), 
         res.json({ imageUrl: filePath });
     } catch (error) {
         console.error("Error saving file path to database:", error);
-        res.status(500).send("Error uploading file");
+        res.status(500).send(CommandResult.failure("ERROR_UPLOADING_FILE"));
     }
 });
 

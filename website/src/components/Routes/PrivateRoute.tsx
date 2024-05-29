@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { AppState } from "../store/store";
+import { AppState } from "../../store/store.ts";
 
 interface PrivateRouteProps {
     children: JSX.Element;

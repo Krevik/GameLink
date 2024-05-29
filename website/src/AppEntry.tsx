@@ -1,13 +1,13 @@
 import { PagePaths } from "./utils/pagePaths.ts";
 import React, { ReactElement } from "react";
 import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
-import PrivateRoute from "./components/PrivateRoute.tsx";
+import PrivateRoute from "./components/Routes/PrivateRoute.tsx";
 import { useSelector } from "react-redux";
 import { AppState } from "./store/store.ts";
 import { useAuthenticationTokenSyncer } from "./store/hooks/useAuthenticationTokenSyncer.ts";
-import Notification from "./components/Notification.tsx";
-import LoginForm from "./components/LoginForm.tsx";
-import RegisterForm from "./components/RegisterForm.tsx";
+import Notification from "./components/Notification/Notification.tsx";
+import LoginForm from "./components/Authentication/LoginForm.tsx";
+import RegisterForm from "./components/Authentication/RegisterForm.tsx";
 import Home from "./pages/Home.tsx";
 import Users from "./pages/Users.tsx";
 import Games from "./pages/Games.tsx";

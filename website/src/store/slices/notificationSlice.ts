@@ -1,8 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface Notification {
     message: string;
-    type: 'success' | 'error';
+    type: "success" | "error" | "info" | "warn";
 }
 
 interface NotificationState {
@@ -14,18 +14,18 @@ const initialState: NotificationState = {
 };
 
 const notificationSlice = createSlice({
-    name: 'notifications',
+    name: "notifications",
     initialState,
     reducers: {
         addNotification(state, action: PayloadAction<Notification>) {
             state.notifications.push(action.payload);
         },
-        removeNotification(state) {
+        removeNotifications(state) {
             state.notifications.shift();
         },
     },
 });
 
-export const { addNotification, removeNotification } = notificationSlice.actions;
+export const { addNotification, removeNotifications } = notificationSlice.actions;
 
 export default notificationSlice.reducer;

@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { RestUtils } from "../../utils/RestUtils.ts";
+import { CommandResult, RestUtils } from "../../utils/RestUtils.ts";
 import { useSelector } from "react-redux";
 import { AppState } from "../../store/store.ts";
 import { HOST_URL } from "../../api/axiosConfig.ts";
 import "./UploadableProfilePicture.css";
+import { NotificationUtils } from "../../utils/notificationUtils.ts";
 
 interface UploadableProfilePictureProps {
     avatarFileName?: string;
@@ -44,9 +45,11 @@ export const UploadableProfilePicture = (props: UploadableProfilePictureProps) =
         formData.append("file", selectedFile);
 
         try {
-            await RestUtils.Profile.uploadProfilePicture(userId, formData);
-            props.onNewAvatarUploaded();
-            console.log("File uploaded successfully");
+            const result: CommandResult = await RestUtils.Profile.uploadProfilePicture(userId, formData);
+            if (result.isSuccess) {
+                NotificationUtils.notifySuccess("PROFILE_PICTURE_UPDATED");
+                props.onNewAvatarUploaded();
+            }
         } catch (error) {
             console.error("Error uploading file:", error);
         }

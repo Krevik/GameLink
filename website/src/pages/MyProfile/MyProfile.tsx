@@ -7,13 +7,13 @@ import { AppState } from "../../store/store.ts";
 import { RestUtils, UserProfileUpdateDTO } from "../../utils/RestUtils.ts";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
 import { SelectItem } from "primereact/selectitem";
-import { notifyError, notifySuccess } from "../../utils/notificationUtils.ts";
 import { InputTextarea } from "primereact/inputtextarea";
 import { UploadableProfilePicture } from "../../components/UploadableProfilePicture/UploadableProfilePicture.tsx";
 import { InputNumber, InputNumberChangeEvent } from "primereact/inputnumber";
 import { Card } from "primereact/card";
 import "./MyProfile.css";
 import { InputText } from "primereact/inputtext";
+import { NotificationUtils } from "../../utils/notificationUtils.ts";
 
 export const MyProfile = () => {
     const userId: number | null = useSelector((state: AppState) => state.auth.userId);
@@ -49,12 +49,12 @@ export const MyProfile = () => {
                 if (result.isSuccess) {
                     loadUserProfile();
                 } else {
-                    notifyError(result.message);
+                    NotificationUtils.notifyError(result.message);
                 }
             })
             .finally(() => {
                 setIsUpdateInProgress(false);
-                notifySuccess("Profile updated!");
+                NotificationUtils.notifySuccess("Profile updated!");
             });
     };
 
@@ -70,7 +70,7 @@ export const MyProfile = () => {
             updatedProfile.age = event.value;
             updateUserProfile(updatedProfile);
         } else {
-            notifyError("Age cannot be less than 0!");
+            NotificationUtils.notifyError("Age cannot be less than 0!");
         }
     };
 

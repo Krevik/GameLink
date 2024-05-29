@@ -5,24 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6c6364a-8950-4e30-ae1e-1c5a7f1780c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/website/src/AppEntry.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/store/hooks/useAuthenticationTokenSyncer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/website/src/components/Authentication/RegisterForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/.eslintrc.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/website/.eslintrc.cjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/Layout/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/Layout/Layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/LoginForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/Messages/ConversationList/ConversationList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/Messages/ConversationList/ConversationList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/Messages/MessageList/MessageList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/Messages/MessageList/MessageList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/Messages/MessagesComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/Messages/MessagesComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/Notification.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/Notification.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/store/authSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/store/slices/authSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/store/messagesSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/store/slices/messagesSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/store/notificationSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/store/slices/notificationSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/store/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/store/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/src/AppEntry.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/AppEntry.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/src/components/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/Authentication/LoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/src/components/Notification.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/Notification/Notification.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/src/components/PrivateRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/Routes/PrivateRoute.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/src/components/RegisterForm.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/src/components/UploadableProfilePicture/UploadableProfilePicture.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/UploadableProfilePicture/UploadableProfilePicture.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/src/pages/MyProfile/MyProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/pages/MyProfile/MyProfile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/src/store/slices/notificationSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/store/slices/notificationSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/src/utils/RestUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/utils/RestUtils.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/src/utils/notificationUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/utils/notificationUtils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/website/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,11 +65,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\github\GameLink\website\src\components\Authentication" />
+      <recent name="D:\github\GameLink\website\src\components\Routes" />
+      <recent name="D:\github\GameLink\website\src\components\Notification" />
       <recent name="D:\github\GameLink\website\src\store\slices" />
       <recent name="D:\github\GameLink\website\src\components\Messages" />
-      <recent name="D:\github\GameLink\website\src\pages\MyProfile" />
-      <recent name="D:\github\GameLink\website\src\components\Layout" />
-      <recent name="D:\github\GameLink\website\src\components\UploadableProfilePicture" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -95,7 +90,7 @@
       <workItem from="1716390274100" duration="4639000" />
       <workItem from="1716470124577" duration="3102000" />
       <workItem from="1716652493669" duration="2062000" />
-      <workItem from="1716989663758" duration="1852000" />
+      <workItem from="1716989663758" duration="2660000" />
     </task>
     <servers />
   </component>
