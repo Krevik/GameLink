@@ -4,14 +4,14 @@ import bodyParser = require("body-parser");
 import cors = require("cors");
 import { PrismaClient } from "@prisma/client";
 import messageRoutes from "./src/routes/messageRoutes";
-import conversationRoutes from "./src/routes/conversationRoutes";
 import profileRoutes from "./src/routes/profileRoutes";
 import gameRoutes from "./src/routes/gameRoutes";
 import userRoutes from "./src/routes/userRoutes";
-import authRoutes from "./src/routes/authRoutes";
 import multer from "multer";
 import path from "node:path";
 import fs from "fs";
+import { authRoutes } from "./src/routes/authRoutes";
+import { conversationRoutes } from "./src/routes/conversationRoutes";
 
 export const prisma = new PrismaClient();
 const serverApp: Express = express();
@@ -34,6 +34,7 @@ serverApp.use("/messages", messageRoutes);
 serverApp.use("/auth", authRoutes);
 serverApp.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+//TODO move somehwere else
 const upload = multer({
     storage: multer.diskStorage({
         destination: (req, file, cb) => {
@@ -49,12 +50,12 @@ const upload = multer({
     }),
 });
 
+//TODO move to controller, cut out special chars from filename
 serverApp.post(`/profiles/uploadProfilePicture/:userId`, upload.single("file"), async (req, res) => {
     if (!req.file) {
         return res.status(400).send("No file uploaded.");
     }
 
-    //TODO remove old on success
     const filePath: string = `/uploads/profilePictures/${req.file.filename}`;
     const { userId } = req.params;
     if (!userId) {

@@ -8,6 +8,7 @@ export const handleCreateUser = async (req: Request, res: Response) => {
         await createUser(email, password, username);
         res.status(201).json(CommandResult.success());
     } catch (error) {
+        console.log(error);
         res.status(500).json(CommandResult.failure("Error creating user"));
     }
 };

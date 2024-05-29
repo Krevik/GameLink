@@ -24,6 +24,7 @@ export const register = async (req: Request, res: Response) => {
         });
         res.status(201).json(CommandResult.success());
     } catch (error) {
+        console.log(error);
         res.status(500).json(CommandResult.failure("Error registering user"));
     }
 };

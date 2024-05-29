@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { ReactElement, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 import "primereact/resources/themes/bootstrap4-dark-blue/theme.css";
@@ -21,6 +21,10 @@ import "primeicons/primeicons.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
+const createRoute = (path: keyof typeof PagePaths, element: ReactElement, shouldBeProtectedByAuthentication: boolean = false) => {
+    return <Route path={path} element={shouldBeProtectedByAuthentication ? <PrivateRoute>{element}</PrivateRoute> : element} />;
+};
+
 const App: React.FC = () => {
     const accessToken = useSelector((state: AppState) => state.auth.accessToken);
 
@@ -42,38 +46,10 @@ const App: React.FC = () => {
                 <Route path="/" element={<Navigate to={accessToken ? "/home" : "/login"} />} />
                 <Route path="/login" element={<LoginForm />} />
                 <Route path="/register" element={<RegisterForm />} />
-                <Route
-                    path={PagePaths.HOME}
-                    element={
-                        <PrivateRoute>
-                            <Home />
-                        </PrivateRoute>
-                    }
-                />
-                <Route
-                    path={PagePaths.USERS}
-                    element={
-                        <PrivateRoute>
-                            <Users />
-                        </PrivateRoute>
-                    }
-                />
-                <Route
-                    path={PagePaths.GAMES}
-                    element={
-                        <PrivateRoute>
-                            <Games />
-                        </PrivateRoute>
-                    }
-                />
-                <Route
-                    path={PagePaths.MY_PROFILE}
-                    element={
-                        <PrivateRoute>
-                            <MyProfile />
-                        </PrivateRoute>
-                    }
-                />
+                {createRoute("HOME", <Home />, true)}
+                {createRoute("USERS", <Users />, true)}
+                {createRoute("GAMES", <Games />, true)}
+                {createRoute("MYPROFILE", <MyProfile />, true)}
             </Routes>
         </Router>
     );

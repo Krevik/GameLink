@@ -5,154 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6c6364a-8950-4e30-ae1e-1c5a7f1780c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/GameLink.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/controllers/authController.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/controllers/conversationController.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/controllers/gameController.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/controllers/messageController.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/controllers/profileController.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/controllers/userController.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/middleware/authMiddleware.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/routes/authRoutes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/routes/conversationRoutes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/routes/gameRoutes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/routes/messageRoutes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/routes/profileRoutes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/routes/userRoutes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/services/conversationService.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/services/gameService.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/services/profileService.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/services/userService.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/api/axiosConfig.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/api/conversationApi.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/api/gameApi.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/api/messageApi.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/api/profileApi.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/api/userApi.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/components/Layout/Layout.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/components/Layout/Layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/components/LoginForm.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/components/Messages/ConversationList/ConversationList.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/components/Messages/ConversationList/ConversationList.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/components/Messages/MessageBubble/MessageBubble.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/components/Messages/MessageBubble/MessageBubble.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/components/Messages/MessageList/MessageList.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/components/Messages/MessageList/MessageList.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/components/Messages/MessagesComponent.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/components/Messages/MessagesComponent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/components/Notification.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/components/PrivateRoute.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/components/RegisterForm.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/components/UploadableProfilePicture/UploadableProfilePicture.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/components/UploadableProfilePicture/UploadableProfilePicture.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/pages/Games.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/pages/Home.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/pages/MyProfile/MyProfile.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/pages/MyProfile/MyProfile.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/pages/Users.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/store/authSlice.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/store/messagesSlice.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/store/notificationSlice.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/store/store.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/types/profileTypes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/utils/notificationUtils.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/utils/pagePaths.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/utils/translation/TranslationBaseDictionary.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/utils/translation/TranslationUtils.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/src/utils/translation/dictionaries/EnglishDictonary.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Reservly.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/892dd583-7dc6-44a9-8128-5094ed5c8633.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/892dd583-7dc6-44a9-8128-5094ed5c8633/storage_v2/_src_/database/Reservly.NvD37g.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/892dd583-7dc6-44a9-8128-5094ed5c8633/storage_v2/_src_/database/Reservly.NvD37g/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/892dd583-7dc6-44a9-8128-5094ed5c8633/storage_v2/_src_/database/Reservly.NvD37g/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/892dd583-7dc6-44a9-8128-5094ed5c8633/storage_v2/_src_/database/Reservly.NvD37g/schema/public.abK9xQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/prisma/migrations/20240316083628_init/migration.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/prisma/migrations/migration_lock.toml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/backend/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/generated/client/default.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/generated/client/default.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/generated/client/edge.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/generated/client/edge.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/generated/client/index-browser.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/generated/client/index.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/generated/client/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/generated/client/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/generated/client/query_engine-windows.dll.node" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/generated/client/runtime/edge-esm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/generated/client/runtime/edge.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/generated/client/runtime/index-browser.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/generated/client/runtime/index-browser.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/generated/client/runtime/library.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/generated/client/runtime/library.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/generated/client/runtime/wasm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/generated/client/schema.prisma" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/generated/client/wasm.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/generated/client/wasm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/page/PageController.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/page/PageFinder.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/page/PageService.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/page/PageValidation.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/security/UserAuthentication.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/user/UserController.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/user/UserFinder.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/user/UserService.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/user/UserValidation.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/visit/VisitFinder.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/website/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/website/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/BookingCalendar/BookingCalendar.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/BookingCalendar/BookingCalendar.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/DataTable/GenericColumn/GenericColumn.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/Layout/PageLayout.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/Layout/PageLayout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/Modal/ConfirmationModal.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/Modal/ConfirmationModal.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/Navigation/PageNavigation.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/Navigation/PageNavigation.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/Notifications/NotificationUtils.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/Notifications/NotificationsOverlay.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/UserSessionRestore/UserSessionManager.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/globalStyles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/main.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/config/passport.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/config/passport.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/controllers/authController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/controllers/authController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/controllers/userController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/controllers/userController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/middleware/authMiddleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/middleware/authMiddleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/routes/authRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/routes/authRoutes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/routes/conversationRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/routes/conversationRoutes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/utils/CommandResult.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/utils/CommandResult.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/utils/ExtendedExpres.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/utils/ExtendedExpres.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/src/components/Layout/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/Layout/Layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/pages/Home/Home.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/pages/Home/Home.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/pages/Login/Login.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/pages/Login/Login.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/pages/Pages/Modal/AddNewWorkshopModal.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/pages/Pages/Page/Page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/pages/Pages/PageCard/PageCard.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/pages/Pages/PageCard/WorkshopCard.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/pages/Pages/PageRestService.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/pages/Pages/PageTypes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/pages/Pages/Pages.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/pages/Pages/Pages.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/pages/UserManagement/AddUserModal/AddUserModal.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/config/passport.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/pages/UserManagement/AddUserModal/AddUserModal.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/pages/UserManagement/UserManagement.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/pages/UserManagement/UserManagement.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/pages/UserManagement/UserRestService.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/pages/UserManagement/UserTypes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/redux/hooks/useUserDetails.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/redux/slices/NotificationsSlice.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/redux/slices/UserDetailsSlice.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/redux/store.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/utils/ApiPaths.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/utils/CommandResult.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/utils/PagePaths.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/utils/RestUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/utils/RestUtils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/website/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/tsconfig.node.json" beforeDir="false" afterPath="$PROJECT_DIR$/website/tsconfig.node.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/src/utils/pagePaths.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/utils/pagePaths.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,6 +89,8 @@
       <workItem from="1716388576549" duration="1678000" />
       <workItem from="1716390274100" duration="4639000" />
       <workItem from="1716470124577" duration="3102000" />
+      <workItem from="1716652493669" duration="2062000" />
+      <workItem from="1716989663758" duration="1376000" />
     </task>
     <servers />
   </component>

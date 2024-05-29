@@ -1,7 +1,6 @@
 import { Express, Request, Response } from "express";
-import { UserAuthentication } from "../security/UserAuthentication";
-import { UserAuthenticationData } from "../user/UserService";
 
+//TODO not used right now, coming from my old app, might be usefull for token verification?
 export const ExtendedExpres = {
     authenticatedPost: (serverApp: Express, path: string, onAuthSuccess: (reqGiven: Request, resGiven: Response, userAuthData: UserAuthenticationData) => void) =>
         serverApp.post(path, async (req: Request, res: Response) => {
