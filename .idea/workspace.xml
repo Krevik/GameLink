@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6c6364a-8950-4e30-ae1e-1c5a7f1780c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/website/src/components/Authentication/RegisterForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/AppEntry.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/AppEntry.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/Authentication/LoginForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/Notification.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/Notification/Notification.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/PrivateRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/Routes/PrivateRoute.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/RegisterForm.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/components/UploadableProfilePicture/UploadableProfilePicture.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/components/UploadableProfilePicture/UploadableProfilePicture.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/pages/MyProfile/MyProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/pages/MyProfile/MyProfile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/store/slices/notificationSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/store/slices/notificationSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/utils/RestUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/utils/RestUtils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/controllers/messageController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/controllers/messageController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/services/conversationService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/services/conversationService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/src/utils/notificationUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/utils/notificationUtils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -91,6 +82,7 @@
       <workItem from="1716470124577" duration="3102000" />
       <workItem from="1716652493669" duration="2062000" />
       <workItem from="1716989663758" duration="2660000" />
+      <workItem from="1717073391373" duration="3440000" />
     </task>
     <servers />
   </component>
