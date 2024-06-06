@@ -10,7 +10,7 @@ export const ProfileController = {
             await ProfileService.createProfile(userId, bio, avatarUrl, platform, availability);
             res.status(201).json(CommandResult.success());
         } catch (error) {
-            res.status(500).json(CommandResult.failure("Error creating profile"));
+            res.status(500).json(CommandResult.failure("ERROR_CREATING_PROFILE"));
         }
     },
 
@@ -21,10 +21,10 @@ export const ProfileController = {
             if (profile) {
                 res.json(profile);
             } else {
-                res.status(404).json(CommandResult.failure("Profile not found"));
+                res.status(404).json(CommandResult.failure("PROFILE_NOT_FOUND"));
             }
         } catch (error) {
-            res.status(500).json(CommandResult.failure("Error fetching profile"));
+            res.status(500).json(CommandResult.failure("ERROR_GETTING_PROFILE"));
         }
     },
 
@@ -40,7 +40,7 @@ export const ProfileController = {
             res.json(CommandResult.success());
         } catch (error) {
             console.log(error);
-            res.status(500).json(CommandResult.failure("Error updating profile"));
+            res.status(500).json(CommandResult.failure("ERROR_UPDATING_PROFILE"));
         }
     },
 };

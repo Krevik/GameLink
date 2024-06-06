@@ -3,7 +3,6 @@ import { prisma } from "../../index";
 import { CommandResult } from "../utils/CommandResult";
 
 export const MessageController = {
-
     getUnreadMessagesCount: async (req: Request, res: Response) => {
         const userId = parseInt(req.params.userId);
 
@@ -27,7 +26,7 @@ export const MessageController = {
 
             res.json({ count });
         } catch (error) {
-            res.status(500).json(CommandResult.failure("Failed to fetch unread messages count"));
+            res.status(500).json(CommandResult.failure("FAILED_TO_FETCH_UNREAD_MESSAGES_COUNT"));
         }
     },
 
@@ -42,9 +41,9 @@ export const MessageController = {
                 },
             });
 
-            res.status(204).end();
+            res.status(204).json(CommandResult.success());
         } catch (error) {
-            res.status(500).json(CommandResult.failure("Failed to mark message as read"));
+            res.status(500).json(CommandResult.failure("FAILED_TO MARK_MESSAGE_AS_READ"));
         }
     },
 
@@ -63,7 +62,7 @@ export const MessageController = {
 
             res.json(messages);
         } catch (error) {
-            res.status(500).json(CommandResult.failure("Failed to fetch messages for conversation"));
+            res.status(500).json(CommandResult.failure("FAILED_TO_FETCH_MESSAGES_FOR_CONVERSATION"));
         }
     },
 
@@ -86,7 +85,7 @@ export const MessageController = {
 
             res.status(201).json(message);
         } catch (error) {
-            res.status(500).json(CommandResult.failure("Failed to send message"));
+            res.status(500).json(CommandResult.failure("FAILED_TO_SEND_MESSAGE"));
         }
     },
 
@@ -125,7 +124,7 @@ export const MessageController = {
 
             res.json(conversations);
         } catch (error) {
-            res.status(500).json(CommandResult.failure("Failed to fetch conversations for user"));
+            res.status(500).json(CommandResult.failure("FAILED_TO_FETCH_CONVERSATIONS"));
         }
     },
 
@@ -144,8 +143,7 @@ export const MessageController = {
 
             res.json(users);
         } catch (error) {
-            res.status(500).json(CommandResult.failure("Failed to search users"));
+            res.status(500).json(CommandResult.failure("FAILED_TO_SEARCH_USERS"));
         }
-    }
-
-}
+    },
+};

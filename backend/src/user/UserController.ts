@@ -9,7 +9,7 @@ export const UserController = {
             await UserService.createUser(email, password, username);
             res.status(201).json(CommandResult.success());
         } catch (error) {
-            res.status(500).json(CommandResult.failure("Error creating user"));
+            res.status(500).json(CommandResult.failure("ERROR_CREATING_USER"));
         }
     },
     handleGetUserById: async (req: Request, res: Response) => {
@@ -19,10 +19,10 @@ export const UserController = {
             if (user) {
                 res.json(user);
             } else {
-                res.status(404).json(CommandResult.failure("User not found"));
+                res.status(404).json(CommandResult.failure("USER_NOT_FOUND"));
             }
         } catch (error) {
-            res.status(500).json(CommandResult.failure("Error fetching user"));
+            res.status(500).json(CommandResult.failure("ERROR_FETCHING_USER"));
         }
     },
     handleGetAllUsers: async (req: Request, res: Response) => {
@@ -30,7 +30,7 @@ export const UserController = {
             const users = await UserService.getAllUsers();
             res.json(users);
         } catch (error) {
-            res.status(500).json(CommandResult.failure("Error fetching users"));
+            res.status(500).json(CommandResult.failure("ERROR_FETCHING_USERS"));
         }
     },
 };

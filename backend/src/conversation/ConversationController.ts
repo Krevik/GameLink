@@ -9,7 +9,7 @@ export const ConversationController = {
             await ConversationService.createConversation(participants);
             res.status(201).json(CommandResult.success());
         } catch (error) {
-            res.status(500).json(CommandResult.failure("Error creating conversation"));
+            res.status(500).json(CommandResult.failure("ERROR_CREATING_CONVERSATION"));
         }
     },
 
@@ -20,10 +20,10 @@ export const ConversationController = {
             if (conversation) {
                 res.json(conversation);
             } else {
-                res.status(404).json(CommandResult.failure("Conversation not found"));
+                res.status(404).json(CommandResult.failure("CONVERSATION_NOT_FOUND"));
             }
         } catch (error) {
-            res.status(500).json(CommandResult.failure("Error fetching conversation"));
+            res.status(500).json(CommandResult.failure("ERROR_GETTING_CONVERSATION"));
         }
     },
 };
