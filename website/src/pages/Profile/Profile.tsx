@@ -84,14 +84,14 @@ export const Profile = () => {
     const getSexFieldElement = (): ReactElement => (
         <div className="profile-field">
             <label>Sex</label>
-            <Dropdown disabled={isUpdateInProgress || !isMyProfile} value={profile?.sex} options={sexSelectOptions} onChange={onSexChange} className="p-inputtext-sm" />
+            <Dropdown disabled={isUpdateInProgress || !isMyProfile} value={profile?.sex} options={sexSelectOptions} onChange={onSexChange} />
         </div>
     );
 
     const getAgeFieldElement = (): ReactElement => (
         <div className="profile-field">
             <label>Age</label>
-            <InputNumber disabled={!isMyProfile} value={profile?.age} onChange={onAgeChange} className="p-inputtext-sm" />
+            <InputNumber disabled={!isMyProfile} value={profile?.age} onChange={onAgeChange} />
         </div>
     );
 
@@ -183,8 +183,10 @@ export const Profile = () => {
                     <div className="profile-content">
                         <UploadableProfilePicture avatarFileName={profile?.avatarUrl} onNewAvatarUploaded={() => loadUserProfile(Number(userId))} editionEnabled={isMyProfile} />
                         <div className="profile-details">
-                            {getSexFieldElement()}
-                            {getAgeFieldElement()}
+                            <div className="details-row">
+                                {getSexFieldElement()}
+                                {getAgeFieldElement()}
+                            </div>
                             {getBioFieldElement()}
                             {getFavouritePlatformFieldElement()}
                             {getAvailablePlatformsFieldElement()}

@@ -29,6 +29,12 @@
     width: 100%;
 }
 
+.details-row {
+    display: flex;
+    flex-direction:row;
+    place-content: space-between;
+}
+
 .profile-field {
     display: flex;
     flex-direction: column;
