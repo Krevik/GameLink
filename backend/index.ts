@@ -3,16 +3,15 @@ import express = require("express");
 import bodyParser = require("body-parser");
 import cors = require("cors");
 import { PrismaClient } from "@prisma/client";
-import messageRoutes from "./src/routes/messageRoutes";
-import profileRoutes from "./src/routes/profileRoutes";
-import gameRoutes from "./src/routes/gameRoutes";
-import userRoutes from "./src/routes/userRoutes";
 import multer from "multer";
 import path from "node:path";
 import fs from "fs";
-import { authRoutes } from "./src/routes/authRoutes";
-import { conversationRoutes } from "./src/routes/conversationRoutes";
 import { CommandResult } from "./src/utils/CommandResult";
+import userRouter from "./src/user/UserRouter";
+import profileRouter from "./src/profile/ProfileRouter";
+import messageRouter from "./src/message/MessageRouter";
+import { authRouter } from "./src/auth/authRouter";
+import { ConversationRouter } from "./src/conversation/ConversationRouter";
 
 export const prisma = new PrismaClient();
 const serverApp: Express = express();
@@ -27,12 +26,12 @@ serverApp.use(
 serverApp.use(bodyParser.json());
 serverApp.use(bodyParser.urlencoded({ extended: true }));
 
-serverApp.use("/users", userRoutes);
-serverApp.use("/games", gameRoutes);
-serverApp.use("/profiles", profileRoutes);
-serverApp.use("/conversations", conversationRoutes);
-serverApp.use("/messages", messageRoutes);
-serverApp.use("/auth", authRoutes);
+serverApp.use("/users", userRouter);
+// serverApp.use("/games", gameRoutes);
+serverApp.use("/profiles", profileRouter);
+serverApp.use("/conversations", ConversationRouter);
+serverApp.use("/messages", messageRouter);
+serverApp.use("/auth", authRouter);
 serverApp.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 //TODO move somehwere else

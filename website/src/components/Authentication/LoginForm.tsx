@@ -8,6 +8,7 @@ import axiosInstance from "../../api/axiosConfig.ts";
 import { AppState } from "../../store/store.ts";
 import { translate, TranslationUtils } from "../../utils/translation/TranslationUtils.ts";
 import { NotificationUtils } from "../../utils/notificationUtils.ts";
+import { CommandResult } from "../../utils/RestUtils.ts";
 
 const LoginForm: React.FC = () => {
     const dispatch = useDispatch();
@@ -33,9 +34,9 @@ const LoginForm: React.FC = () => {
             NotificationUtils.notifySuccess(translate("LOGIN_SUCCESS"));
             navigate("/home");
         } catch (error) {
-            const errors = error.response?.data?.errors;
+            const errors = error.response?.data as CommandResult;
             if (errors) {
-                errors.forEach((err: any) => NotificationUtils.notifyError(err.msg));
+                NotificationUtils.notifyError(errors.message);
             } else {
                 NotificationUtils.notifyError(error.response.data.message || "Failed to login");
             }
