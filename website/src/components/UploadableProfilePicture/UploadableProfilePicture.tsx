@@ -9,6 +9,7 @@ import { NotificationUtils } from "../../utils/notificationUtils.ts";
 interface UploadableProfilePictureProps {
     avatarFileName?: string;
     onNewAvatarUploaded: () => void;
+    editionEnabled?: boolean;
 }
 
 export const UploadableProfilePicture = (props: UploadableProfilePictureProps) => {
@@ -62,8 +63,8 @@ export const UploadableProfilePicture = (props: UploadableProfilePictureProps) =
     return (
         <div className="profile-picture-upload">
             <div className="profile-picture-preview">
-                <img src={preview ?? `${HOST_URL}${props.avatarFileName}`} alt="Profile Preview" className="profile-picture" onClick={onInputClick} />
-                <input ref={fileInputRef} style={{ display: "none" }} type="file" accept="image/*" onChange={handleFileChange} className="file-input" />
+                <img src={preview ?? `${HOST_URL}${props.avatarFileName}`} alt="Profile Preview" className="profile-picture" onClick={props.editionEnabled && onInputClick} />
+                <input ref={fileInputRef} style={{ display: "none" }} type="file" accept="image/*" onChange={props.editionEnabled && handleFileChange} className="file-input" />
             </div>
         </div>
     );

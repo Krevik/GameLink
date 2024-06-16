@@ -2,14 +2,16 @@ import React, { PropsWithChildren } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
 import "./Layout.css";
-import store from "../../store/store.ts";
+import store, { AppState } from "../../store/store.ts";
 import { clearAccessToken, clearUserId } from "../../store/slices/authSlice.ts";
 import { translate } from "../../utils/translation/TranslationUtils.ts";
 import { PagePaths } from "../../utils/pagePaths.ts";
 import { MessagesComponent } from "../Messages/MessagesComponent.tsx";
+import { useSelector } from "react-redux";
 
 const Layout = (props: PropsWithChildren) => {
     const navigate = useNavigate();
+    const currentLoggedInUserId: number | null = useSelector((state: AppState) => state.auth.userId);
 
     const handleLogout = () => {
         store.dispatch(clearAccessToken());
@@ -35,7 +37,7 @@ const Layout = (props: PropsWithChildren) => {
                     <Link to={PagePaths.GAMES} className="navbar-item">
                         Games
                     </Link>
-                    <Link to={PagePaths.MYPROFILE} className="navbar-item">
+                    <Link to={`/profile/${currentLoggedInUserId}`} className="navbar-item">
                         My Profile
                     </Link>
                 </div>

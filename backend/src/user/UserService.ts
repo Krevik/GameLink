@@ -18,6 +18,6 @@ export const UserService = {
     },
 
     getAllUsers: async () => {
-        return prisma.user.findMany();
+        return prisma.user.findMany({ select: { password: false, id: true, username: true, email: true, createdAt: true, steamId: true } });
     },
 };

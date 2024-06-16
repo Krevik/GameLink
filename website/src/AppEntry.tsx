@@ -11,7 +11,7 @@ import RegisterForm from "./components/Authentication/RegisterForm.tsx";
 import Home from "./pages/Home.tsx";
 import Users from "./pages/Users.tsx";
 import Games from "./pages/Games.tsx";
-import { MyProfile } from "./pages/MyProfile/MyProfile.tsx";
+import { Profile } from "./pages/Profile/Profile.tsx";
 
 const createRoute = (path: keyof typeof PagePaths, element: ReactElement, shouldBeProtectedByAuthentication: boolean = false) => {
     return <Route path={path} element={shouldBeProtectedByAuthentication ? <PrivateRoute>{element}</PrivateRoute> : element} />;
@@ -29,10 +29,11 @@ const AppEntry = () => {
                 <Route path="/" element={<Navigate to={accessToken ? "/home" : "/login"} />} />
                 <Route path="/login" element={<LoginForm />} />
                 <Route path="/register" element={<RegisterForm />} />
+                <Route path="/profile/:userId" element={<Profile />} />
                 {createRoute("HOME", <Home />, true)}
                 {createRoute("USERS", <Users />, true)}
                 {createRoute("GAMES", <Games />, true)}
-                {createRoute("MYPROFILE", <MyProfile />, true)}
+                {/*{createRoute("MYPROFILE", <MyProfile />, true)}*/}
             </Routes>
         </Router>
     );
