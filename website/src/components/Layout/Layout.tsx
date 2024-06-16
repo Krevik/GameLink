@@ -34,6 +34,9 @@ const Layout = (props: PropsWithChildren) => {
                     <Link to={PagePaths.USERS} className="navbar-item">
                         Users
                     </Link>
+                    <Link to={"/friends"} className="navbar-item">
+                        Friends
+                    </Link>
                     <Link to={PagePaths.GAMES} className="navbar-item">
                         Games
                     </Link>

@@ -12,6 +12,7 @@ import Home from "./pages/Home.tsx";
 import Users from "./pages/Users.tsx";
 import Games from "./pages/Games.tsx";
 import { Profile } from "./pages/Profile/Profile.tsx";
+import { Friends } from "./pages/Friends/Friends.tsx";
 
 const createRoute = (path: keyof typeof PagePaths, element: ReactElement, shouldBeProtectedByAuthentication: boolean = false) => {
     return <Route path={path} element={shouldBeProtectedByAuthentication ? <PrivateRoute>{element}</PrivateRoute> : element} />;
@@ -30,6 +31,14 @@ const AppEntry = () => {
                 <Route path="/login" element={<LoginForm />} />
                 <Route path="/register" element={<RegisterForm />} />
                 <Route path="/profile/:userId" element={<Profile />} />
+                <Route
+                    path="/friends"
+                    element={
+                        <PrivateRoute>
+                            <Friends />
+                        </PrivateRoute>
+                    }
+                />
                 {createRoute("HOME", <Home />, true)}
                 {createRoute("USERS", <Users />, true)}
                 {createRoute("GAMES", <Games />, true)}

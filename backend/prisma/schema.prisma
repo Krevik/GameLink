@@ -21,6 +21,22 @@ model User {
   sentMessages       Message[]            @relation("SentMessages")
   UserOnConversation UserOnConversation[]
   MessageReadReceipt MessageReadReceipt[]
+
+  friendsSent     Friend[] @relation("friendsSent")
+  friendsReceived Friend[] @relation("friendsReceived")
+}
+
+model Friend {
+  id         Int      @id @default(autoincrement())
+  senderId   Int
+  receiverId Int
+  createdAt  DateTime @default(now())
+  accepted   Boolean  @default(false)
+
+  sender   User @relation("friendsSent", fields: [senderId], references: [id])
+  receiver User @relation("friendsReceived", fields: [receiverId], references: [id])
+
+  @@unique([senderId, receiverId])
 }
 
 enum UserRole {

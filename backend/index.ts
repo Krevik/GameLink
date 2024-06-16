@@ -12,6 +12,8 @@ import profileRouter from "./src/profile/ProfileRouter";
 import messageRouter from "./src/message/MessageRouter";
 import { authRouter } from "./src/auth/authRouter";
 import { ConversationRouter } from "./src/conversation/ConversationRouter";
+import { FriendsRouter } from "./src/friends/FriendsRouter";
+import { DatabaseSeeder } from "./src/mocks/databaseSeeder";
 
 export const prisma = new PrismaClient();
 const serverApp: Express = express();
@@ -33,6 +35,7 @@ serverApp.use("/conversations", ConversationRouter);
 serverApp.use("/messages", messageRouter);
 serverApp.use("/auth", authRouter);
 serverApp.use("/uploads", express.static(path.join(__dirname, "uploads")));
+serverApp.use("/friends", FriendsRouter);
 
 //TODO move somehwere else
 const upload = multer({
@@ -85,6 +88,9 @@ serverApp.post(`/profiles/uploadProfilePicture/:userId`, upload.single("file"), 
         res.status(500).send(CommandResult.failure("ERROR_UPLOADING_FILE"));
     }
 });
+
+//TODO make script for database cleaning and seeding with use of databaseSeeder
+//DatabaseSeeder.seedDatabase();
 
 const PORT = process.env.PORT || 8124;
 serverApp.listen(PORT, async () => {

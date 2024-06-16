@@ -1,5 +1,6 @@
 import axiosInstance from "../api/axiosConfig.ts";
 import { UserProfile } from "../types/profileTypes.ts";
+import { FriendDTO } from "../pages/Friends/Friends.tsx";
 
 export interface CommandResultFailure {
     isSuccess: false;
@@ -27,5 +28,8 @@ export const RestUtils = {
                     },
                 })
                 .then((data) => data.data),
+    },
+    Friends: {
+        getAll: (userId: number) => axiosInstance.get<FriendDTO[]>(`/friends/${userId}/friends`).then((data) => data.data),
     },
 };
