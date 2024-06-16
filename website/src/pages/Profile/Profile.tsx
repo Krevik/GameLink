@@ -7,7 +7,7 @@ import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
 import { SelectItem } from "primereact/selectitem";
 import { InputTextarea } from "primereact/inputtextarea";
 import { UploadableProfilePicture } from "../../components/UploadableProfilePicture/UploadableProfilePicture.tsx";
-import { InputNumber, InputNumberChangeEvent } from "primereact/inputnumber";
+import { InputNumber } from "primereact/inputnumber";
 import { Card } from "primereact/card";
 import "./Profile.css";
 import { InputText } from "primereact/inputtext";
@@ -16,7 +16,6 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AppState } from "../../store/store.ts";
 import { Chips, ChipsChangeEvent } from "primereact/chips";
-import { Tooltip } from "primereact/tooltip";
 
 export const Profile = () => {
     const [profile, setProfile] = useState<UserProfile | undefined>(undefined);
@@ -113,7 +112,7 @@ export const Profile = () => {
                 }
                 cols={60}
                 rows={5}
-                autoResize={true}
+                autoResize
                 onBlur={() => updateUserProfile(profile!)}
                 className="p-inputtext-sm"
             />
