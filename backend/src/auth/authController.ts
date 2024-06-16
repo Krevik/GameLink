@@ -35,7 +35,14 @@ export const AuthController = {
         console.log(errors);
 
         if (!errors.isEmpty()) {
-            return res.status(400).json(CommandResult.failure(errors.array().join("\n")));
+            return res.status(400).json(
+                CommandResult.failure(
+                    errors
+                        .array()
+                        .map((error) => error.msg)
+                        .join("\n"),
+                ),
+            );
         }
 
         const { email, password } = req.body;
