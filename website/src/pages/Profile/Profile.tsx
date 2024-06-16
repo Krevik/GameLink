@@ -71,16 +71,6 @@ export const Profile = () => {
         updateUserProfile(updatedProfile);
     };
 
-    const onAgeChange = (event: InputNumberChangeEvent) => {
-        const updatedProfile: UserProfile = { ...profile, userId: Number(userId) };
-        if (event.value && event.value > 0) {
-            updatedProfile.age = event.value;
-            updateUserProfile(updatedProfile);
-        } else {
-            NotificationUtils.notifyError("Age cannot be less than 0!");
-        }
-    };
-
     const getSexFieldElement = (): ReactElement => (
         <div className="profile-field">
             <label>Sex</label>
@@ -91,7 +81,20 @@ export const Profile = () => {
     const getAgeFieldElement = (): ReactElement => (
         <div className="profile-field">
             <label>Age</label>
-            <InputNumber disabled={!isMyProfile} value={profile?.age} onChange={onAgeChange} />
+            <InputNumber
+                disabled={!isMyProfile}
+                value={profile?.age}
+                onChange={(event) =>
+                    setProfile({
+                        ...profile,
+                        userId: Number(userId),
+                        age: event.value,
+                    })
+                }
+                min={5}
+                max={200}
+                onBlur={() => updateUserProfile(profile!)}
+            />
         </div>
     );
 
