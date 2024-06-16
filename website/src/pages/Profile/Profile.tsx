@@ -15,6 +15,8 @@ import { NotificationUtils } from "../../utils/notificationUtils.ts";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AppState } from "../../store/store.ts";
+import { Chips, ChipsChangeEvent } from "primereact/chips";
+import { Tooltip } from "primereact/tooltip";
 
 export const Profile = () => {
     const [profile, setProfile] = useState<UserProfile | undefined>(undefined);
@@ -137,18 +139,19 @@ export const Profile = () => {
     const getAvailablePlatformsFieldElement = (): ReactElement => (
         <div className="profile-field">
             <label>Available Platforms</label>
-            <InputText
+            <Chips
+                tooltip={"Use comma for separating platforms"}
+                separator={","}
                 disabled={!isMyProfile}
-                value={profile?.availablePlatforms?.join(",") ?? ""}
-                onChange={(event) =>
+                value={profile?.availablePlatforms}
+                onBlur={() => updateUserProfile(profile!)}
+                onChange={(event: ChipsChangeEvent) =>
                     setProfile({
                         ...profile,
                         userId: Number(userId),
-                        availablePlatforms: event.target.value.split(","),
+                        availablePlatforms: event.target.value,
                     })
                 }
-                onBlur={() => updateUserProfile(profile!)}
-                className="p-inputtext-sm"
             />
         </div>
     );
@@ -156,18 +159,19 @@ export const Profile = () => {
     const getFavouriteGamesFieldElement = (): ReactElement => (
         <div className="profile-field">
             <label>Favourite Games</label>
-            <InputText
+            <Chips
+                tooltip={"Use comma for separating games"}
+                separator={","}
                 disabled={!isMyProfile}
-                value={profile?.favouriteGames?.join(",") ?? ""}
-                onChange={(event) =>
+                value={profile?.favouriteGames}
+                onBlur={() => updateUserProfile(profile!)}
+                onChange={(event: ChipsChangeEvent) =>
                     setProfile({
                         ...profile,
                         userId: Number(userId),
-                        favouriteGames: event.target.value.split(","),
+                        favouriteGames: event.target.value,
                     })
                 }
-                onBlur={() => updateUserProfile(profile!)}
-                className="p-inputtext-sm"
             />
         </div>
     );
