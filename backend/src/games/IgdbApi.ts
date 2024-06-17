@@ -22,6 +22,8 @@ interface GameInfo {
     name: string;
     platforms?: number[];
     total_rating?: number;
+    aggregated_rating?: number;
+    cover?: number;
 }
 
 const getAuthenticationInfo = fetch(`https://id.twitch.tv/oauth2/token?client_id=${client_id}&client_secret=${client_secret}&grant_type=client_credentials`, { method: "POST" });
@@ -34,7 +36,7 @@ const getGamesInfo = (offset: number = 0, limit: number = 10) =>
             "Client-ID": client_id,
             Authorization: `Bearer ${authInfo?.access_token}`,
         },
-        body: `fields alternative_names,category,created_at,dlcs,expanded_games,genres,name,platforms,total_rating;limit ${limit};offset ${offset};`,
+        body: `fields alternative_names,category,created_at,dlcs,expanded_games,genres,name,platforms,total_rating,aggregated_rating,cover;limit ${limit};offset ${offset};`,
     });
 
 const loadGamesInfo = async (limit: number = 400, offset: number = 0) => {
