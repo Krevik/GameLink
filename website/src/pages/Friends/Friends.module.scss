@@ -1,0 +1,5 @@
+
+.friends {
+    display: grid;
+    grid: 1fr 1fr / repeat(auto-fill, minmax(300px, 1fr));
+}

@@ -9,7 +9,7 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { UploadableProfilePicture } from "../../components/UploadableProfilePicture/UploadableProfilePicture.tsx";
 import { InputNumber } from "primereact/inputnumber";
 import { Card } from "primereact/card";
-import "./Profile.css";
+import styles from "./Profile.module.scss";
 import { InputText } from "primereact/inputtext";
 import { NotificationUtils } from "../../utils/notificationUtils.ts";
 import { useParams } from "react-router-dom";
@@ -71,14 +71,14 @@ export const Profile = () => {
     };
 
     const getSexFieldElement = (): ReactElement => (
-        <div className="profile-field">
+        <div className={styles.profileField}>
             <label>Sex</label>
             <Dropdown disabled={isUpdateInProgress || !isMyProfile} value={profile?.sex} options={sexSelectOptions} onChange={onSexChange} />
         </div>
     );
 
     const getAgeFieldElement = (): ReactElement => (
-        <div className="profile-field">
+        <div className={styles.profileField}>
             <label>Age</label>
             <InputNumber
                 disabled={!isMyProfile}
@@ -98,7 +98,7 @@ export const Profile = () => {
     );
 
     const getBioFieldElement = (): ReactElement => (
-        <div className="profile-field">
+        <div className={styles.profileField}>
             <label>Bio</label>
             <InputTextarea
                 disabled={!isMyProfile}
@@ -114,13 +114,13 @@ export const Profile = () => {
                 rows={5}
                 autoResize
                 onBlur={() => updateUserProfile(profile!)}
-                className="p-inputtext-sm"
+                className={styles.pInputtextSm}
             />
         </div>
     );
 
     const getFavouritePlatformFieldElement = (): ReactElement => (
-        <div className="profile-field">
+        <div className={styles.profileField}>
             <label>Favourite Platform</label>
             <InputText
                 disabled={!isMyProfile}
@@ -133,13 +133,13 @@ export const Profile = () => {
                     })
                 }
                 onBlur={() => updateUserProfile(profile!)}
-                className="p-inputtext-sm"
+                className={styles.pInputtextSm}
             />
         </div>
     );
 
     const getAvailablePlatformsFieldElement = (): ReactElement => (
-        <div className="profile-field">
+        <div className={styles.profileField}>
             <label>Available Platforms</label>
             <Chips
                 tooltip={"Use comma for separating platforms"}
@@ -154,12 +154,13 @@ export const Profile = () => {
                         availablePlatforms: event.target.value,
                     })
                 }
+                className={styles.pInputtext}
             />
         </div>
     );
 
     const getFavouriteGamesFieldElement = (): ReactElement => (
-        <div className="profile-field">
+        <div className={styles.profileField}>
             <label>Favourite Games</label>
             <Chips
                 tooltip={"Use comma for separating games"}
@@ -174,18 +175,19 @@ export const Profile = () => {
                         favouriteGames: event.target.value,
                     })
                 }
+                className={styles.pInputtext}
             />
         </div>
     );
 
     return (
         <Layout>
-            <div className="profile-container">
-                <Card title={translate("MY_PROFILE")} className="profile-card">
-                    <div className="profile-content">
+            <div className={styles.profileContainer}>
+                <Card title={translate("MY_PROFILE")} className={styles.profileCard}>
+                    <div className={styles.profileContent}>
                         <UploadableProfilePicture avatarFileName={profile?.avatarUrl} onNewAvatarUploaded={() => loadUserProfile(Number(userId))} editionEnabled={isMyProfile} />
-                        <div className="profile-details">
-                            <div className="details-row">
+                        <div className={styles.profileDetails}>
+                            <div className={styles.detailsRow}>
                                 {getSexFieldElement()}
                                 {getAgeFieldElement()}
                             </div>

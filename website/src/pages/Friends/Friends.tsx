@@ -7,6 +7,8 @@ import { DataTable } from "primereact/datatable";
 import { UserProfile } from "../../types/profileTypes.ts";
 import { GenericColumn } from "../../components/DataTable/GenericColumn.tsx";
 import { HOST_URL } from "../../api/axiosConfig.ts";
+import styles from "./Friends.module.scss";
+import { FriendCard } from "./FriendCard/FriendCard.tsx";
 
 export interface FriendUserDTO {
     id: number;
@@ -32,13 +34,18 @@ export const Friends = () => {
         RestUtils.Friends.getAll(currentLoggedInUserId!).then(setFriends);
     }, [currentLoggedInUserId]);
 
-    const getAvatarCellBody = (rowData: FriendDTO): ReactElement => <img src={`${HOST_URL}${rowData.friend?.profile?.avatarUrl}`} alt="Profile Picture" />;
+    // const getPersonCellBody = (rowData: FriendDTO): ReactElement => (
+    //     <div className={styles.person}>
+    //         <img src={`${HOST_URL}${rowData.friend?.profile?.avatarUrl}`} alt="Profile Picture" className={styles.profilePicture} />
+    //         <div className={styles.userName}>{rowData.friend.username}</div>
+    //     </div>
+    // );
+
+    const mapFriendsToFriendCards = (friends: FriendDTO[]): ReactElement[] => friends.map((friend) => <FriendCard friend={friend} />);
 
     return (
         <Layout>
-            <DataTable value={friends} dataKey="id">
-                <GenericColumn header="Avatar" body={getAvatarCellBody} />;
-            </DataTable>
+            <div className={styles.friends}>{mapFriendsToFriendCards(friends)}</div>
         </Layout>
     );
 };

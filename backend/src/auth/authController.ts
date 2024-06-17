@@ -16,13 +16,14 @@ export const AuthController = {
 
         const hashedPassword = await bcrypt.hash(password, 10);
         try {
-            await prisma.user.create({
+            const createdUser = await prisma.user.create({
                 data: {
                     email,
                     password: hashedPassword,
                     username,
                 },
             });
+            await prisma.profile.create({ data: { userId: createdUser.id } });
             res.status(201).json(CommandResult.success());
         } catch (error) {
             console.log(error);

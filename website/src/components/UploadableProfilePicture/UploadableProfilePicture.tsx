@@ -25,6 +25,9 @@ export const UploadableProfilePicture = (props: UploadableProfilePictureProps) =
     }, [props.avatarFileName]);
 
     const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (!props.editionEnabled) {
+            return;
+        }
         const file = event.target.files ? event.target.files[0] : null;
         setSelectedFile(file);
         if (file) {
@@ -35,15 +38,15 @@ export const UploadableProfilePicture = (props: UploadableProfilePictureProps) =
             reader.readAsDataURL(file);
         }
 
-        await handleUpload();
+        await handleUpload(file);
         props.onNewAvatarUploaded();
     };
 
-    const handleUpload = async () => {
-        if (!selectedFile) return;
+    const handleUpload = async (file: File) => {
+        if (!file) return;
 
         const formData = new FormData();
-        formData.append("file", selectedFile);
+        formData.append("file", file);
 
         try {
             const result: CommandResult = await RestUtils.Profile.uploadProfilePicture(userId, formData);
@@ -57,14 +60,14 @@ export const UploadableProfilePicture = (props: UploadableProfilePictureProps) =
     };
 
     const onInputClick = () => {
-        fileInputRef.current?.click();
+        props.editionEnabled && fileInputRef.current?.click();
     };
 
     return (
         <div className="profile-picture-upload">
             <div className="profile-picture-preview">
-                <img src={preview ?? `${HOST_URL}${props.avatarFileName}`} alt="Profile Preview" className="profile-picture" onClick={props.editionEnabled && onInputClick} />
-                <input ref={fileInputRef} style={{ display: "none" }} type="file" accept="image/*" onChange={props.editionEnabled && handleFileChange} className="file-input" />
+                <img src={preview ?? `${HOST_URL}${props.avatarFileName}`} alt="Profile Preview" className="profile-picture" onClick={onInputClick} />
+                <input ref={fileInputRef} style={{ display: "none" }} type="file" accept="image/*" onChange={handleFileChange} className="file-input" />
             </div>
         </div>
     );

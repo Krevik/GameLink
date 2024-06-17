@@ -13,7 +13,6 @@ import messageRouter from "./src/message/MessageRouter";
 import { authRouter } from "./src/auth/authRouter";
 import { ConversationRouter } from "./src/conversation/ConversationRouter";
 import { FriendsRouter } from "./src/friends/FriendsRouter";
-import { DatabaseSeeder } from "./src/mocks/databaseSeeder";
 
 export const prisma = new PrismaClient();
 const serverApp: Express = express();
@@ -66,7 +65,7 @@ serverApp.post(`/profiles/uploadProfilePicture/:userId`, upload.single("file"), 
     }
     try {
         await prisma.profile.update({
-            where: { id: Number(userId) },
+            where: { userId: Number(userId) },
             data: { avatarUrl: filePath },
         });
 
