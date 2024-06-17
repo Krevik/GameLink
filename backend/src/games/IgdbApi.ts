@@ -3,9 +3,9 @@ import { prisma } from "../../index";
 //TODO move to .env
 const client_id = "sayvwm88hylj3u74yngs9eywjovaqc";
 const client_secret = "9jz6225aw5g0yp22alvtoxuewft70j";
-let authInfo: AuthResponse | undefined = undefined;
+let authInfo: TwitchApiAuthInfo | undefined = undefined;
 
-interface AuthResponse {
+interface TwitchApiAuthInfo {
     access_token: string;
     expires_in: number;
     token_type: string;
@@ -38,13 +38,6 @@ const getGamesInfo = (offset: number = 0, limit: number = 10) =>
     });
 
 const loadGamesInfo = async (limit: number = 400, offset: number = 0) => {
-    if (!authInfo) {
-        const rawResponse = await getAuthenticationInfo;
-        const data: AuthResponse = await rawResponse.json();
-        authInfo = data;
-        console.log("Retrieved Auth Info: ");
-        console.log(authInfo);
-    }
     const gamesInfoRaw = await getGamesInfo(offset, limit);
     const gamesInfo: GameInfo[] = await gamesInfoRaw.json();
     if (gamesInfo.length === 0) {
@@ -60,19 +53,18 @@ const loadGamesInfo = async (limit: number = 400, offset: number = 0) => {
     loadGamesInfo(limit, offset + gamesInfo.length);
 };
 
+const loadAuthInfo = async () => {
+    console.log("Started fetching games info");
+    const rawResponse = await getAuthenticationInfo;
+    const data: TwitchApiAuthInfo = await rawResponse.json();
+    authInfo = data;
+    console.log("Retrieved Auth Info: ");
+    console.log(authInfo);
+};
+
 export const IgdbApi = {
-    loadGamesInfo: async () => {
-        if (!authInfo) {
-            const rawResponse = await getAuthenticationInfo;
-            const data: AuthResponse = await rawResponse.json();
-            authInfo = data;
-            console.log("Retrieved Auth Info: ");
-            console.log(authInfo);
-        }
-        console.log("Started fetching games info");
+    updateGamesDatabase: async () => {
+        await loadAuthInfo();
         loadGamesInfo();
-        // const gamesInfo = await getGamesInfo()
-        //     .then((res) => res.json())
-        //     .then((data: GameInfo[]) => console.log(data));
     },
 };
