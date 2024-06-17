@@ -13,6 +13,7 @@ import messageRouter from "./src/message/MessageRouter";
 import { authRouter } from "./src/auth/authRouter";
 import { ConversationRouter } from "./src/conversation/ConversationRouter";
 import { FriendsRouter } from "./src/friends/FriendsRouter";
+import { IgdbApi } from "./src/games/IgdbApi";
 
 export const prisma = new PrismaClient();
 const serverApp: Express = express();
@@ -92,8 +93,10 @@ serverApp.post(`/profiles/uploadProfilePicture/:userId`, upload.single("file"), 
 //DatabaseSeeder.seedDatabase();
 
 const PORT = process.env.PORT || 8124;
+const gamesInfoFetchingInterval: number = 1000 * 60 * 60 * 24 * 7; // 7 days - once in a week
 serverApp.listen(PORT, async () => {
     console.log(`Server is setting up on PORT ${PORT}`);
     // await dbUtils.testDBConnection();
     console.log(`Initial setup finished`);
+    setInterval(IgdbApi.loadGamesInfo, gamesInfoFetchingInterval);
 });

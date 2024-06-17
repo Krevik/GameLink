@@ -26,6 +26,19 @@ model User {
   friendsReceived Friend[] @relation("friendsReceived")
 }
 
+model GameInfo {
+  id                Int    @id
+  alternative_names Int[]  @default([])
+  category          Int?
+  created_at        Int?
+  dlcs              Int[]  @default([])
+  expanded_games    Int[]  @default([])
+  genres            Int[]  @default([])
+  name              String
+  platforms         Int[]  @default([])
+  total_rating      Float?
+}
+
 model Friend {
   id         Int      @id @default(autoincrement())
   senderId   Int
