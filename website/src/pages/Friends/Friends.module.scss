@@ -1,5 +1,6 @@
 
 .friends {
-    display: grid;
-    grid: 1fr 1fr / repeat(auto-fill, minmax(300px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
 }

@@ -9,8 +9,7 @@
     "dev": "ts-node-dev --respawn --transpile-only index.ts",
     "migrate": "npx prisma migrate dev --name init",
     "generateModels": "npx prisma generate",
-    "db:clean": "ts-node src/database/cleanDatabase.ts",
-    "db:seed": "ts-node src/database/seedDatabase.ts"
+    "db:dumpAndSeed": "ts-node src/database/databaseSeeder.ts"
   },
   "keywords": [],
   "author": "",

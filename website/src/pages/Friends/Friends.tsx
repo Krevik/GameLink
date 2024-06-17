@@ -41,7 +41,7 @@ export const Friends = () => {
     //     </div>
     // );
 
-    const mapFriendsToFriendCards = (friends: FriendDTO[]): ReactElement[] => friends.map((friend) => <FriendCard friend={friend} />);
+    const mapFriendsToFriendCards = (friends: FriendDTO[]): ReactElement[] => friends.map((friend) => <FriendCard friendDTO={friend} />);
 
     return (
         <Layout>

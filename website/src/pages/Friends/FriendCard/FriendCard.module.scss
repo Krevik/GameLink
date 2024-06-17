@@ -1,5 +1,91 @@
-.card {
-  width: 8rem;
-  height: 5rem;
-  background-color: black;
+// src/components/FriendCard/FriendCard.module.scss
+
+.friendCard {
+  background-color: #2c2c2c;
+  border-radius: 10px;
+  width: 280px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  transition: transform 0.3s;
+}
+
+.friendCard:hover {
+  transform: translateY(-5px);
+}
+
+.profilePicture {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+  border: 3px solid #007bff;
+}
+
+.friendName {
+  color: white;
+  margin: 10px 0;
+  font-size: 1.2em;
+}
+
+.friendDetails {
+  text-align: center;
+  color: #a1a1a1;
+  margin-bottom: 15px;
+}
+
+.bio {
+  margin: 5px 0;
+}
+
+.platform,
+.availability {
+  margin: 3px 0;
+}
+
+.friendActions {
+  display: flex;
+  gap: 10px;
+}
+
+.friendActions button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.friendActions button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.messageBtn {
+  background-color: #28a745;
+}
+
+.messageBtn:hover {
+  background-color: #218838;
+}
+
+.viewProfileBtn {
+  background-color: #17a2b8;
+}
+
+.viewProfileBtn:hover {
+  background-color: #138496;
+}
+
+.removeFriendBtn {
+  background-color: #dc3545;
+}
+
+.removeFriendBtn:hover {
+  background-color: #c82333;
 }
