@@ -33,7 +33,8 @@ export const Friends = () => {
 
     useEffect(loadFriends, [currentLoggedInUserId]);
 
-    const mapFriendsToFriendCards = (friends: FriendDTO[]): ReactElement[] => friends.map((friend) => <FriendCard friendDTO={friend} onFriendRemoval={loadFriends} />);
+    const mapFriendsToFriendCards = (friends: FriendDTO[]): ReactElement[] =>
+        friends.map((friend) => <FriendCard key={friend.id} friendDTO={friend} onFriendRemoval={loadFriends} />);
 
     return (
         <Layout>

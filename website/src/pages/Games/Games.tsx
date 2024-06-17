@@ -5,6 +5,7 @@ import styles from "./Games.module.scss";
 import { Pagination } from "./Pagination/Pagination.tsx";
 import { SearchBar } from "./SearchBar/SearchBar.tsx";
 import { GameCard } from "./GameCard/GameCard.tsx";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 export interface GameDTO {
     id: number;
@@ -23,22 +24,34 @@ export interface GameDTO {
     similar_games?: number[];
 }
 
+export interface GamesInfoDTO {
+    games: GameDTO[];
+    totalGames: number;
+}
+
+const GAMES_COUNT_PER_PAGE: number = 50;
+
 const Games: React.FC = () => {
     const [games, setGames] = useState<GameDTO[]>([]);
     const [totalGames, setTotalGames] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [searchQuery, setSearchQuery] = useState("");
+    //TODO render spinner when loading
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     useEffect(() => {
-        let timeout = setTimeout(fetchGames, 300);
+        const timeout = setTimeout(fetchGames, 300);
         return () => clearTimeout(timeout);
-    }, [searchQuery]);
+    }, [searchQuery, currentPage]);
 
     const fetchGames = () => {
-        RestUtils.Games.getGames().then((data) => {
-            setGames(data);
-            setTotalGames(data.length);
-        });
+        setIsLoading(true);
+        RestUtils.Games.getGames(GAMES_COUNT_PER_PAGE, GAMES_COUNT_PER_PAGE * (currentPage - 1), searchQuery)
+            .then((data) => {
+                setGames(data.games);
+                setTotalGames(data.totalGames);
+            })
+            .finally(() => setIsLoading(false));
     };
 
     useEffect(fetchGames, []);
@@ -51,13 +64,17 @@ const Games: React.FC = () => {
     return (
         <Layout>
             <div className={styles.gamesPage}>
-                <SearchBar onSearch={handleSearch} />
-                <div className={styles.gamesList}>
-                    {games.map((game) => (
-                        <GameCard key={game.id} game={game} />
-                    ))}
-                </div>
-                <Pagination currentPage={currentPage} totalPages={Math.ceil(totalGames / 10)} onPageChange={setCurrentPage} />
+                <SearchBar onQueryChange={handleSearch} disabled={isLoading} />
+                {isLoading ? (
+                    <ProgressSpinner className={styles.spinner} />
+                ) : (
+                    <div className={styles.gamesList}>
+                        {games.map((game) => (
+                            <GameCard key={game.id} game={game} />
+                        ))}
+                    </div>
+                )}
+                <Pagination currentPage={currentPage} totalPages={Math.ceil(totalGames / GAMES_COUNT_PER_PAGE)} onPageChange={setCurrentPage} />
             </div>
         </Layout>
     );

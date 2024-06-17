@@ -1,7 +1,7 @@
 import axiosInstance from "../api/axiosConfig.ts";
 import { UserProfile } from "../types/profileTypes.ts";
 import { FriendDTO } from "../pages/Friends/Friends.tsx";
-import { GameDTO } from "../pages/Games/Games.tsx";
+import { GameDTO, GamesInfoDTO } from "../pages/Games/Games.tsx";
 
 export interface CommandResultFailure {
     isSuccess: false;
@@ -39,6 +39,7 @@ export const RestUtils = {
             axiosInstance.post<CommandResult>(`/conversations/create`, { participants: [userId2, userId] }).then((data) => data.data),
     },
     Games: {
-        getGames: (count: number = 100, offset: number = 0) => axiosInstance.get<GameDTO[]>(`/games/${offset}/${count}`).then((data) => data.data),
+        getGames: (count: number = 100, offset: number = 0, searchQuery?: string) =>
+            axiosInstance.get<GamesInfoDTO>(`/games/${offset}/${count}/${searchQuery}`).then((data) => data.data),
     },
 };

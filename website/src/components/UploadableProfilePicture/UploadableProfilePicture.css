@@ -14,6 +14,17 @@
   justify-content: center;
   background-color: #f0f0f0;
   margin-bottom: 10px;
+
+  img {
+    border-radius: 1000rem;
+    transition: all 0.5s ease;
+    width: 150px;
+    height: 150px;
+  }
+
+  img:hover {
+    filter: blur(5px);
+  }
 }
 
 .profile-picture {
@@ -39,15 +50,4 @@
 
 .profile-picture-upload label:hover {
   background-color: #0056b3;
-}
-
-img {
-  border-radius: 1000rem;
-  transition: all 0.5s ease;
-  width: 150px;
-  height: 150px;
-}
-
-img:hover {
-  filter: blur(5px);
 }

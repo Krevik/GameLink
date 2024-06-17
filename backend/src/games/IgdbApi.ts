@@ -75,6 +75,8 @@ const loadGamesInfo = async (limit: number = 400, offset: number = 0) => {
     await loadGamesInfo(limit, offset + gamesInfo.length);
 };
 
+const getHDImageUrl = (imageUrl?: string) => imageUrl?.replace("t_thumb", "t_1080p");
+
 const loadCovers = async (limit: number = 400, offset: number = 0) => {
     const gameCoversRaw = await getCoversInfo(offset, limit);
     const gameCovers: GameCover[] = await gameCoversRaw.json();
@@ -84,7 +86,7 @@ const loadCovers = async (limit: number = 400, offset: number = 0) => {
     }
     let updatePromises: Promise<any>[] = [];
     gameCovers.forEach((cover) => {
-        updatePromises.push(prisma.gameInfo.updateMany({ where: { cover: cover.id }, data: { image_id: cover.image_id, img_url: cover.url } }));
+        updatePromises.push(prisma.gameInfo.updateMany({ where: { cover: cover.id }, data: { image_id: cover.image_id, img_url: getHDImageUrl(cover.url) } }));
     });
     await Promise.all(updatePromises);
     console.log(`offset: ${offset} limit: ${limit} covers.length: ${gameCovers.length}`);

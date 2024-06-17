@@ -2,18 +2,10 @@
 
 import React from "react";
 import styles from "./GameCard.module.scss";
-
-interface GameInfo {
-    id: number;
-    name: string;
-    image_id?: string;
-    img_url?: string;
-    aggregated_rating?: number;
-    summary?: string;
-}
+import { GameDTO } from "../Games.tsx";
 
 interface GameCardProps {
-    game: GameInfo;
+    game: GameDTO;
 }
 
 const HOST_URL = "https://example.com";
