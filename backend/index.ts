@@ -99,4 +99,7 @@ serverApp.listen(PORT, async () => {
     // await dbUtils.testDBConnection();
     console.log(`Initial setup finished`);
     setInterval(IgdbApi.updateGamesDatabase, gamesInfoFetchingInterval);
+    if ((await prisma.gameInfo.count()) < 10) {
+        IgdbApi.updateGamesDatabase();
+    }
 });
