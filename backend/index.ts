@@ -14,6 +14,7 @@ import { authRouter } from "./src/auth/authRouter";
 import { ConversationRouter } from "./src/conversation/ConversationRouter";
 import { FriendsRouter } from "./src/friends/FriendsRouter";
 import { IgdbApi } from "./src/games/IgdbApi";
+import { GamesRouter } from "./src/games/GamesRouter";
 
 export const prisma = new PrismaClient();
 const serverApp: Express = express();
@@ -29,7 +30,7 @@ serverApp.use(bodyParser.json());
 serverApp.use(bodyParser.urlencoded({ extended: true }));
 
 serverApp.use("/users", userRouter);
-// serverApp.use("/games", gameRoutes);
+serverApp.use("/games", GamesRouter);
 serverApp.use("/profiles", profileRouter);
 serverApp.use("/conversations", ConversationRouter);
 serverApp.use("/messages", messageRouter);
@@ -98,8 +99,13 @@ serverApp.listen(PORT, async () => {
     console.log(`Server is setting up on PORT ${PORT}`);
     // await dbUtils.testDBConnection();
     console.log(`Initial setup finished`);
-    setInterval(IgdbApi.updateGamesDatabase, gamesInfoFetchingInterval);
+    IgdbApi.updateGameCovers();
+    setInterval(async () => {
+        await IgdbApi.updateGamesBasicInfo();
+        await IgdbApi.updateGameCovers();
+    }, gamesInfoFetchingInterval);
     if ((await prisma.gameInfo.count()) < 10) {
-        IgdbApi.updateGamesDatabase();
+        await IgdbApi.updateGamesBasicInfo();
+        await IgdbApi.updateGameCovers();
     }
 });

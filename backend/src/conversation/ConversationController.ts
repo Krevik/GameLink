@@ -7,10 +7,8 @@ export const ConversationController = {
         const { participants } = req.body;
         try {
             await ConversationService.createConversation(participants);
-            res.status(201).json(CommandResult.success());
-        } catch (error) {
-            res.status(500).json(CommandResult.failure("ERROR_CREATING_CONVERSATION"));
-        }
+        } catch (error) {}
+        res.status(201).json(CommandResult.success());
     },
 
     handleGetConversationById: async (req: Request, res: Response) => {

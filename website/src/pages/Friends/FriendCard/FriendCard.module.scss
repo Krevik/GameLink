@@ -19,8 +19,6 @@
 
 .profilePicture {
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
   margin-bottom: 10px;
   border: 3px solid #007bff;
 }
@@ -49,43 +47,23 @@
 .friendActions {
   display: flex;
   gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .friendActions button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  display: flex;
+  width: 5rem;
+  height: 2rem;
+  justify-content: center;
+  /* align-items: center; */
+  font-size: smaller;
+  place-items: center;
+
 }
+
 
 .friendActions button:hover {
   background-color: #0056b3;
   transform: translateY(-2px);
-}
-
-.messageBtn {
-  background-color: #28a745;
-}
-
-.messageBtn:hover {
-  background-color: #218838;
-}
-
-.viewProfileBtn {
-  background-color: #17a2b8;
-}
-
-.viewProfileBtn:hover {
-  background-color: #138496;
-}
-
-.removeFriendBtn {
-  background-color: #dc3545;
-}
-
-.removeFriendBtn:hover {
-  background-color: #c82333;
 }

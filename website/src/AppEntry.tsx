@@ -10,7 +10,7 @@ import LoginForm from "./components/Authentication/LoginForm.tsx";
 import RegisterForm from "./components/Authentication/RegisterForm.tsx";
 import Home from "./pages/Home.tsx";
 import Users from "./pages/Users.tsx";
-import Games from "./pages/Games.tsx";
+import Games from "./pages/Games/Games.tsx";
 import { Profile } from "./pages/Profile/Profile.tsx";
 import { Friends } from "./pages/Friends/Friends.tsx";
 

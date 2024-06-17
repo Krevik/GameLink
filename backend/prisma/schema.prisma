@@ -27,18 +27,22 @@ model User {
 }
 
 model GameInfo {
-  id                Int    @id
-  alternative_names Int[]  @default([])
+  id                Int     @id
+  alternative_names Int[]   @default([])
   category          Int?
   created_at        Int?
-  dlcs              Int[]  @default([])
-  expanded_games    Int[]  @default([])
-  genres            Int[]  @default([])
+  dlcs              Int[]   @default([])
+  expanded_games    Int[]   @default([])
+  genres            Int[]   @default([])
   name              String
-  platforms         Int[]  @default([])
+  platforms         Int[]   @default([])
   aggregated_rating Float?
   cover             Int?
   total_rating      Float?
+  image_id          String?
+  img_url           String?
+  summary           String?
+  similar_games     Int[]   @default([])
 }
 
 model Friend {

@@ -3,5 +3,5 @@ import { ConversationController } from "./ConversationController";
 
 export const ConversationRouter = Router();
 
-ConversationRouter.post("/", ConversationController.handleCreateConversation);
+ConversationRouter.post("/create", ConversationController.handleCreateConversation);
 ConversationRouter.get("/:id", ConversationController.handleGetConversationById);

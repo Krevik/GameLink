@@ -11,21 +11,25 @@ import axiosInstance from "../../api/axiosConfig.ts";
 export const MessagesComponent = () => {
     const userId: number = useSelector((state: AppState) => state.auth.userId)!;
     const messagesState: MessagesState = useSelector((state: AppState) => state.messages);
-    const conversations = useSelector((state: AppState) => state.messages.conversations);
+    const conversations: Conversation[] = useSelector((state: AppState) => state.messages.conversations);
 
     useEffect(() => {
         fetchConversations();
     }, []);
 
-    useEffect(() => {
-        fetchConversations();
+    //TODO websocket implementation
+    // const ws = new WebSocket("ws://localhost:8080/ws");
 
-        const interval = setInterval(() => {
-            fetchConversations();
-        }, 5000);
-
-        return () => clearInterval(interval);
-    }, []);
+    //
+    // useEffect(() => {
+    //     fetchConversations();
+    //
+    //     const interval = setInterval(() => {
+    //         fetchConversations();
+    //     }, 5000);
+    //
+    //     return () => clearInterval(interval);
+    // }, []);
 
     const fetchConversations = async () => {
         try {

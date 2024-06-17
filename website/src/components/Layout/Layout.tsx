@@ -47,7 +47,7 @@ const Layout = (props: PropsWithChildren) => {
                 <Button label="Logout" icon="pi pi-sign-out" className="p-button-danger" onClick={handleLogout} />
             </nav>
             <main className="container">{props.children}</main>
-            {/*<MessagesComponent />*/}
+            <MessagesComponent />
         </div>
     );
 };

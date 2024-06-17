@@ -2,6 +2,12 @@ import { prisma } from "../../index";
 
 export const ConversationService = {
     createConversation: async (participants: number[]) => {
+        //check if there is any conversation with these participants
+        const existingConversationsWithTheseParticipants = await prisma.conversation.findMany({ where: { participants: { every: { userId: { in: participants } } } } });
+        if (existingConversationsWithTheseParticipants.length > 0) {
+            return;
+        }
+
         return prisma.conversation.create({
             data: {
                 participants: {
@@ -19,7 +25,5 @@ export const ConversationService = {
                 participants: true,
             },
         });
-    }
-
-}
-
+    },
+};
