@@ -107,7 +107,7 @@ const loadAuthInfo = async () => {
 
 export const IgdbApi = {
     updateGamesBasicInfo: async () => {
-        loadAuthInfo()
+        await loadAuthInfo()
             .then(async () => {
                 try {
                     return await loadGamesInfo();
@@ -120,7 +120,7 @@ export const IgdbApi = {
             });
     },
     updateGameCovers: async () => {
-        loadAuthInfo()
+        await loadAuthInfo()
             .then(async () => {
                 try {
                     return await loadCovers();
