@@ -94,24 +94,40 @@ const loadCovers = async (limit: number = 400, offset: number = 0) => {
 };
 
 const loadAuthInfo = async () => {
-    const rawResponse = await getAuthenticationInfo;
-    const data: TwitchApiAuthInfo = await rawResponse.json();
-    authInfo = data;
-    console.log("Retrieved Auth Info: ");
-    console.log(authInfo);
+    try {
+        const rawResponse = await getAuthenticationInfo;
+        authInfo = await rawResponse.json();
+        console.log("Retrieved Auth Info: ");
+        console.log(authInfo);
+    } catch (error) {
+        console.log("Couldn't get auth info");
+        console.log(error);
+    }
 };
 
 export const IgdbApi = {
     updateGamesBasicInfo: async () => {
         loadAuthInfo()
-            .then(async () => await loadGamesInfo())
+            .then(async () => {
+                try {
+                    return await loadGamesInfo();
+                } catch (error) {
+                    console.log(error);
+                }
+            })
             .then(() => {
                 authInfo = undefined;
             });
     },
     updateGameCovers: async () => {
         loadAuthInfo()
-            .then(async () => await loadCovers())
+            .then(async () => {
+                try {
+                    return await loadCovers();
+                } catch (error) {
+                    console.log(error);
+                }
+            })
             .then(() => {
                 authInfo = undefined;
             });
