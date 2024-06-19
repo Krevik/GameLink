@@ -1,7 +1,6 @@
 import { Express, Request, Response } from "express";
 import express = require("express");
 import bodyParser = require("body-parser");
-import cors = require("cors");
 import { PrismaClient } from "@prisma/client";
 import multer from "multer";
 import path from "node:path";
@@ -15,17 +14,13 @@ import { ConversationRouter } from "./src/conversation/ConversationRouter";
 import { FriendsRouter } from "./src/friends/FriendsRouter";
 import { IgdbApi } from "./src/games/IgdbApi";
 import { GamesRouter } from "./src/games/GamesRouter";
+import { MessagingServer } from "./src/message/MessagingServer";
+const cors = require("cors");
 
 export const prisma = new PrismaClient();
 const serverApp: Express = express();
 
-serverApp.use(
-    cors({
-        origin: "http://localhost:5173",
-        methods: "GET,POST,PUT,DELETE",
-        allowedHeaders: "Content-Type,Authorization",
-    }),
-);
+serverApp.use(cors());
 serverApp.use(bodyParser.json());
 serverApp.use(bodyParser.urlencoded({ extended: true }));
 
@@ -105,4 +100,5 @@ serverApp.listen(PORT, async () => {
     if ((await prisma.gameInfo.count()) < 10) {
         IgdbApi.updateGameInfos();
     }
+    MessagingServer.setupServer();
 });

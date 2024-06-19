@@ -3,10 +3,22 @@ import ConversationList from "./ConversationList/ConversationList.tsx";
 import React, { ReactElement, useEffect } from "react";
 import { useSelector } from "react-redux";
 import store, { AppState } from "../../store/store.ts";
-import { Conversation, MessagesState, setAreMessagesOpen, setConversations, setSelectedConversationId } from "../../store/slices/messagesSlice.ts";
+import {
+    addMessageToConversation,
+    Conversation,
+    Message,
+    MessagesState,
+    setAreMessagesOpen,
+    setConversations,
+    setSelectedConversationId,
+} from "../../store/slices/messagesSlice.ts";
 import { Button } from "primereact/button";
 import "./MessagesComponent.css";
 import axiosInstance from "../../api/axiosConfig.ts";
+import { io } from "socket.io-client";
+
+let socket;
+const CONNECTION_PORT = "localhost:3002/";
 
 export const MessagesComponent = () => {
     const userId: number = useSelector((state: AppState) => state.auth.userId)!;
@@ -17,19 +29,14 @@ export const MessagesComponent = () => {
         fetchConversations();
     }, []);
 
-    //TODO websocket implementation
-    // const ws = new WebSocket("ws://localhost:8080/ws");
+    React.useEffect(() => {
+        socket = io(CONNECTION_PORT);
+        socket.emit("user_connection", userId);
 
-    //
-    // useEffect(() => {
-    //     fetchConversations();
-    //
-    //     const interval = setInterval(() => {
-    //         fetchConversations();
-    //     }, 5000);
-    //
-    //     return () => clearInterval(interval);
-    // }, []);
+        socket.on("message_received", (message: Message) => {
+            store.dispatch(addMessageToConversation({ conversationId: message.conversationId, message: message }));
+        });
+    }, [userId]);
 
     const fetchConversations = async () => {
         try {
@@ -52,6 +59,7 @@ export const MessagesComponent = () => {
         messagesState.selectedConversationId ? (
             <>
                 <MessageList
+                    socket={socket}
                     currentConversation={currentConversation}
                     conversationId={messagesState.selectedConversationId}
                     onConversationIdSelect={onSelectConversationId}

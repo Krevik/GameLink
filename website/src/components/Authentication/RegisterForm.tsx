@@ -1,8 +1,8 @@
 import React from "react";
-import { Container, TextField, Button, Typography, Box, Paper, Link } from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axiosConfig.ts";
 import { NotificationUtils } from "../../utils/notificationUtils.ts";
+import styles from "./RegisterForm.module.scss";
 
 const RegisterForm: React.FC = () => {
     const navigate = useNavigate();
@@ -29,31 +29,29 @@ const RegisterForm: React.FC = () => {
     };
 
     return (
-        <Container maxWidth="sm">
-            <Box display="flex" flexDirection="column" alignItems="center" mt={8}>
-                <Paper elevation={3} style={{ padding: "2rem", width: "100%" }}>
-                    <Typography variant="h4" component="h1" gutterBottom align="center">
-                        Register
-                    </Typography>
+        <div className={styles.container}>
+            <div className={styles.box}>
+                <div className={styles.paper}>
+                    <h1 className={styles.heading}>Register</h1>
                     <form onSubmit={handleSubmit}>
-                        <TextField fullWidth id="email" name="email" label="Email" margin="normal" variant="outlined" />
-                        <TextField fullWidth id="password" name="password" label="Password" type="password" margin="normal" variant="outlined" />
-                        <TextField fullWidth id="username" name="username" label="Username" margin="normal" variant="outlined" />
-                        <Button color="primary" variant="contained" fullWidth type="submit" style={{ marginTop: "1rem" }}>
+                        <input className={styles.input} type="email" id="email" name="email" placeholder="Email" />
+                        <input className={styles.input} type="password" id="password" name="password" placeholder="Password" />
+                        <input className={styles.input} type="text" id="username" name="username" placeholder="Username" />
+                        <button type="submit" className={styles.button}>
                             Register
-                        </Button>
+                        </button>
                     </form>
-                    <Box mt={2} textAlign="center">
-                        <Typography>
+                    <div className={styles.linkBox}>
+                        <p>
                             Masz już konto?{" "}
-                            <Link component={RouterLink} to="/login">
+                            <RouterLink to="/login" className={styles.link}>
                                 Zaloguj się
-                            </Link>
-                        </Typography>
-                    </Box>
-                </Paper>
-            </Box>
-        </Container>
+                            </RouterLink>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 };
 

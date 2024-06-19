@@ -17,6 +17,7 @@ export interface Message {
     senderId: number;
     receiverId: number;
     createdAt: string;
+    conversationId: number;
 }
 
 export interface MessagesState {
@@ -44,9 +45,15 @@ const messagesSlice = createSlice({
         setConversations(state, action: PayloadAction<Conversation[]>) {
             state.conversations = action.payload;
         },
+        addMessageToConversation(state, action: PayloadAction<{ conversationId: number; message: Message }>) {
+            const conversation = state.conversations.find((conversation) => conversation.id === action.payload.conversationId);
+            if (conversation) {
+                conversation.messages.push(action.payload.message);
+            }
+        },
     },
 });
 
-export const { setAreMessagesOpen, setSelectedConversationId, setConversations } = messagesSlice.actions;
+export const { setAreMessagesOpen, setSelectedConversationId, setConversations, addMessageToConversation } = messagesSlice.actions;
 
 export default messagesSlice.reducer;

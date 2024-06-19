@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAccessToken, setUserId } from "../../store/slices/authSlice.ts";
-import axios from "axios";
-import { Container, TextField, Button, Typography, Link, Box, Paper } from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axiosConfig.ts";
 import { AppState } from "../../store/store.ts";
-import { translate, TranslationUtils } from "../../utils/translation/TranslationUtils.ts";
+import { translate } from "../../utils/translation/TranslationUtils.ts";
 import { NotificationUtils } from "../../utils/notificationUtils.ts";
 import { CommandResult } from "../../utils/RestUtils.ts";
+import styles from "./LoginForm.module.scss";
 
 const LoginForm: React.FC = () => {
     const dispatch = useDispatch();
@@ -44,33 +43,33 @@ const LoginForm: React.FC = () => {
     };
 
     return (
-        <Container maxWidth="sm">
-            <Box display="flex" flexDirection="column" alignItems="center" mt={8}>
-                <Paper elevation={3} style={{ padding: "2rem", width: "100%" }}>
-                    <Typography variant="h4" component="h1" gutterBottom align="center">
-                        Login
-                    </Typography>
+        <div className={styles.container}>
+            <div className={styles.box}>
+                <div className={styles.paper}>
+                    <h1 className={styles.heading}>Login</h1>
                     <form onSubmit={handleSubmit}>
-                        <TextField fullWidth id="email" name="email" label="Email" margin="normal" variant="outlined" />
-                        <TextField fullWidth id="password" name="password" label="Password" type="password" margin="normal" variant="outlined" />
-                        <Button color="primary" variant="contained" fullWidth type="submit" style={{ marginTop: "1rem" }}>
+                        <input className={styles.input} type="email" id="email" name="email" placeholder="Email" />
+                        <input className={styles.input} type="password" id="password" name="password" placeholder="Password" />
+                        <button type="submit" className={styles.button}>
                             Login
-                        </Button>
-                        <Box mt={2} textAlign="center">
-                            <Link href="http://localhost:3000/auth/steam">Login with Steam</Link>
-                        </Box>
+                        </button>
+                        <div className={styles.linkBox}>
+                            <a href="http://localhost:3000/auth/steam" className={styles.link}>
+                                Login with Steam
+                            </a>
+                        </div>
                     </form>
-                    <Box mt={2} textAlign="center">
-                        <Typography>
+                    <div className={styles.linkBox}>
+                        <p>
                             Nie masz konta?{" "}
-                            <Link component={RouterLink} to="/register">
+                            <RouterLink to="/register" className={styles.link}>
                                 Zarejestruj się
-                            </Link>
-                        </Typography>
-                    </Box>
-                </Paper>
-            </Box>
-        </Container>
+                            </RouterLink>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 };
 

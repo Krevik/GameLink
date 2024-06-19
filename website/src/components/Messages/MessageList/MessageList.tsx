@@ -4,23 +4,24 @@ import MessageBubble from "../MessageBubble/MessageBubble.tsx";
 import axiosInstance from "../../../api/axiosConfig.ts";
 import { Button } from "primereact/button";
 import { Conversation } from "../../../store/slices/messagesSlice.ts";
+import { useSelector } from "react-redux";
+import { AppState } from "../../../store/store.ts";
 
 interface MessageListProps {
     conversationId: number;
     userId: number;
     onConversationIdSelect: (id: number | undefined) => void;
     currentConversation: Conversation | undefined;
+    socket: any;
 }
 
 const MessageList: React.FC<MessageListProps> = (props: MessageListProps) => {
+    const userId: number = useSelector((state: AppState) => state.auth.userId)!;
+
     const [newMessage, setNewMessage] = useState("");
     const handleSendMessage = async () => {
         if (newMessage.trim()) {
-            await axiosInstance.post("/messages/sendMessage", {
-                content: newMessage,
-                senderId: props.userId,
-                conversationId: props.conversationId,
-            });
+            props.socket.emit("message_sent", { senderId: userId, conversationId: props.conversationId, message: newMessage });
             setNewMessage("");
         }
     };
