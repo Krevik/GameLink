@@ -99,14 +99,11 @@ serverApp.listen(PORT, async () => {
     console.log(`Server is setting up on PORT ${PORT}`);
     // await dbUtils.testDBConnection();
     console.log(`Initial setup finished`);
-    await IgdbApi.updateGamesBasicInfo();
-    await IgdbApi.updateGameCovers();
+    IgdbApi.updateGameInfos();
     setInterval(async () => {
-        await IgdbApi.updateGamesBasicInfo();
-        await IgdbApi.updateGameCovers();
+        IgdbApi.updateGameInfos();
     }, gamesInfoFetchingInterval);
     if ((await prisma.gameInfo.count()) < 10) {
-        await IgdbApi.updateGamesBasicInfo();
-        await IgdbApi.updateGameCovers();
+        IgdbApi.updateGameInfos();
     }
 });

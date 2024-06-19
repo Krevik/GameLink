@@ -106,42 +106,13 @@ const loadAuthInfo = async () => {
 };
 
 export const IgdbApi = {
-    updateGamesBasicInfo: async () => {
-        await loadAuthInfo()
-            .then(async () => {
-                try {
-                    return await loadGamesInfo();
-                } catch (error) {
-                    console.log(error);
-                }
-            })
-            .then(() => {
-                authInfo = undefined;
-            });
+    updateGameInfos: async () => {
+        loadAuthInfo().then(() =>
+            loadGamesInfo().then(() => {
+                loadCovers().then(() => {
+                    authInfo = undefined;
+                });
+            }),
+        );
     },
-    updateGameCovers: async () => {
-        await loadAuthInfo()
-            .then(async () => {
-                try {
-                    return await loadCovers();
-                } catch (error) {
-                    console.log(error);
-                }
-            })
-            .then(() => {
-                authInfo = undefined;
-            });
-    },
-    // loadAuthInfo: async () => loadAuthInfo(),
-    // updateGamesDatabase: async () => {
-    //     console.log("Started fetching games info");
-    //     loadGamesInfo();
-    // },
-    // updateGameCovers: async () => {
-    //     console.log("Started fetching game covers");
-    //     loadCovers();
-    // },
-    // cleanAuthInfo: async () => {
-    //     authInfo = undefined;
-    // },
 };
