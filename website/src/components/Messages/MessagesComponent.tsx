@@ -22,7 +22,6 @@ const CONNECTION_PORT = "localhost:3002/";
 export const MessagesComponent = () => {
     const userId: number = useSelector((state: AppState) => state.auth.userId)!;
     const messagesState: MessagesState = useSelector((state: AppState) => state.messages);
-    const conversations: Conversation[] = useSelector((state: AppState) => state.messages.conversations);
 
     React.useEffect(() => {
         socket = io(CONNECTION_PORT);
@@ -43,7 +42,7 @@ export const MessagesComponent = () => {
 
     const getChatWidgetClassname: string = messagesState.areMessagesOpen ? "chat-widget" : "chat-widget-disabled";
 
-    const currentConversation: Conversation | undefined = conversations.find((conversation) => conversation.id === messagesState.selectedConversationId);
+    const currentConversation: Conversation | undefined = messagesState.conversations.find((conversation) => conversation.id === messagesState.selectedConversationId);
 
     const getInnerMessagesComponent = (): ReactElement =>
         messagesState.selectedConversationId ? (

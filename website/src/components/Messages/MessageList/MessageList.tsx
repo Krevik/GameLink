@@ -33,8 +33,9 @@ const MessageList: React.FC<MessageListProps> = (props: MessageListProps) => {
     useEffect(scrollToBottom, [props.currentConversation?.messages]);
 
     const handleSendMessage = async () => {
+        const receiverIds: number[] = props.currentConversation.participants.map((participant) => participant.user.id);
         if (newMessage.trim()) {
-            props.socket.emit("message_sent", { senderId: userId, conversationId: props.conversationId, message: newMessage });
+            props.socket.emit("message_sent", { senderId: userId, conversationId: props.conversationId, message: newMessage, receiverIds: receiverIds });
             setNewMessage("");
         }
     };

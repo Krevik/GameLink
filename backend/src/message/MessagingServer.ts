@@ -25,14 +25,15 @@ export const MessagingServer = {
 
 const registerUserConnectionSocketListener = (socket: Socket) =>
     socket.on("user_connection", async (userId: number) => {
+        socket.join(userId.toString());
         serverLogger.info(`User connected: ${userId}`);
-        serverLogger.info(`Sending conversations to ${userId}`);
         const conversations = await ConversationFinder.getConversationsForUser(userId);
+        serverLogger.info(`Sending conversations to ${userId}, with size: ${conversations?.length}`);
         socket.emit("conversations_received", conversations);
     });
 
 const registerMessageSentSocketListener = (socket: Socket) =>
-    socket.on("message_sent", async (event: { senderId: number; conversationId: number; message: string }) => {
+    socket.on("message_sent", async (event: { senderId: number; conversationId: number; message: string; receiverIds: number[] }) => {
         serverLogger.info(`Message received: ${JSON.stringify(event)}`);
 
         try {
@@ -48,8 +49,10 @@ const registerMessageSentSocketListener = (socket: Socket) =>
                     },
                 },
             });
-            socket.emit("message_received", message);
-            serverLogger.info(`Emitting message_received event to the sender: ${JSON.stringify(message)}`);
+            event.receiverIds.forEach((receiverId) => {
+                socket.to(receiverId.toString()).emit("message_received", message);
+            });
+            serverLogger.info(`Emitting message_received event: ${JSON.stringify(message)}}`);
         } catch (error) {
             serverLogger.error("Couldn't save the message to the database: ");
             serverLogger.error(JSON.stringify(error));
