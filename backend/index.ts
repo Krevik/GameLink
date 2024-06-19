@@ -99,7 +99,6 @@ serverApp.listen(PORT, async () => {
     console.log(`Server is setting up on PORT ${PORT}`);
     // await dbUtils.testDBConnection();
     console.log(`Initial setup finished`);
-    IgdbApi.updateGameInfos();
     setInterval(async () => {
         IgdbApi.updateGameInfos();
     }, gamesInfoFetchingInterval);
