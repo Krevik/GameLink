@@ -23,7 +23,7 @@ export const MessagesComponent = () => {
     const userId: number = useSelector((state: AppState) => state.auth.userId)!;
     const messagesState: MessagesState = useSelector((state: AppState) => state.messages);
 
-    React.useEffect(() => {
+    useEffect(() => {
         socket = io(CONNECTION_PORT);
         socket.emit("user_connection", userId);
 
@@ -34,7 +34,7 @@ export const MessagesComponent = () => {
         socket.on("conversations_received", (conversations: Conversation[]) => {
             store.dispatch(setConversations(conversations));
         });
-    }, [userId]);
+    }, []);
 
     const onSelectConversationId = (conversationId: number | undefined) => {
         store.dispatch(setSelectedConversationId(conversationId));

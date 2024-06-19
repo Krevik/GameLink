@@ -6,7 +6,7 @@ import { ConversationFinder } from "../conversation/ConversationFinder";
 const serverLogger: Logger = new Logger("MessagingServer");
 export const MessagingServer = {
     setupServer: () => {
-        const io = new Server(3002, {});
+        const io: Server = new Server(3002, {});
 
         io.engine.on("headers", (headers, req) => {
             headers["Access-Control-Allow-Origin"] = "*";
@@ -17,14 +17,16 @@ export const MessagingServer = {
         io.on("connection", (socket: Socket) => {
             serverLogger.info(`Connection incoming: ${socket.id}`);
 
-            registerUserConnectionSocketListener(socket);
+            registerUserConnectionSocketListener(socket, io);
             registerMessageSentSocketListener(socket);
         });
     },
 };
 
-const registerUserConnectionSocketListener = (socket: Socket) =>
+const registerUserConnectionSocketListener = (socket: Socket, server: Server) =>
     socket.on("user_connection", async (userId: number) => {
+        const sockets = await server.fetchSockets();
+        //TODO we have currently doubling sockets, fix it and remove trytytka on front
         socket.join(userId.toString());
         serverLogger.info(`User connected: ${userId}`);
         const conversations = await ConversationFinder.getConversationsForUser(userId);
