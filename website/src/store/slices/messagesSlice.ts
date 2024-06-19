@@ -45,8 +45,8 @@ const messagesSlice = createSlice({
         setConversations(state, action: PayloadAction<Conversation[]>) {
             state.conversations = action.payload;
         },
-        addMessageToConversation(state, action: PayloadAction<{ conversationId: number; message: Message }>) {
-            const conversation = state.conversations.find((conversation) => conversation.id === action.payload.conversationId);
+        addMessageToConversation(state, action: PayloadAction<{ message: Message }>) {
+            const conversation = state.conversations.find((conversation) => conversation.id === action.payload.message.conversationId);
             if (conversation) {
                 conversation.messages.push(action.payload.message);
             }

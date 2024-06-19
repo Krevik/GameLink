@@ -14,10 +14,9 @@ import {
 } from "../../store/slices/messagesSlice.ts";
 import { Button } from "primereact/button";
 import "./MessagesComponent.css";
-import axiosInstance from "../../api/axiosConfig.ts";
-import { io } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 
-let socket;
+let socket: Socket;
 const CONNECTION_PORT = "localhost:3002/";
 
 export const MessagesComponent = () => {
@@ -25,27 +24,18 @@ export const MessagesComponent = () => {
     const messagesState: MessagesState = useSelector((state: AppState) => state.messages);
     const conversations: Conversation[] = useSelector((state: AppState) => state.messages.conversations);
 
-    useEffect(() => {
-        fetchConversations();
-    }, []);
-
     React.useEffect(() => {
         socket = io(CONNECTION_PORT);
         socket.emit("user_connection", userId);
 
         socket.on("message_received", (message: Message) => {
-            store.dispatch(addMessageToConversation({ conversationId: message.conversationId, message: message }));
+            store.dispatch(addMessageToConversation({ message: message }));
+        });
+
+        socket.on("conversations_received", (conversations: Conversation[]) => {
+            store.dispatch(setConversations(conversations));
         });
     }, [userId]);
-
-    const fetchConversations = async () => {
-        try {
-            const response = await axiosInstance.get(`/messages/conversations/${userId}`);
-            store.dispatch(setConversations(response.data));
-        } catch (error) {
-            console.error("Failed to fetch conversations", error);
-        }
-    };
 
     const onSelectConversationId = (conversationId: number | undefined) => {
         store.dispatch(setSelectedConversationId(conversationId));

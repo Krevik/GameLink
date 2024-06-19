@@ -1,6 +1,7 @@
 import { Server, Socket } from "socket.io";
 import Logger from "../Logger/Logger";
 import { prisma } from "../../index";
+import { ConversationFinder } from "../conversation/ConversationFinder";
 
 const serverLogger: Logger = new Logger("MessagingServer");
 export const MessagingServer = {
@@ -23,9 +24,11 @@ export const MessagingServer = {
 };
 
 const registerUserConnectionSocketListener = (socket: Socket) =>
-    socket.on("user_connection", (userId: number) => {
+    socket.on("user_connection", async (userId: number) => {
         serverLogger.info(`User connected: ${userId}`);
-        // socket.join(userId);
+        serverLogger.info(`Sending conversations to ${userId}`);
+        const conversations = await ConversationFinder.getConversationsForUser(userId);
+        socket.emit("conversations_received", conversations);
     });
 
 const registerMessageSentSocketListener = (socket: Socket) =>

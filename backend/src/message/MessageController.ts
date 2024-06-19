@@ -89,45 +89,6 @@ export const MessageController = {
         }
     },
 
-    getConversationsForUser: async (req: Request, res: Response) => {
-        const userId = parseInt(req.params.userId);
-
-        try {
-            const conversations = await prisma.conversation.findMany({
-                where: {
-                    participants: {
-                        some: {
-                            userId: userId,
-                        },
-                    },
-                },
-                include: {
-                    messages: {
-                        orderBy: {
-                            createdAt: "asc",
-                        },
-                    },
-                    participants: {
-                        include: {
-                            user: {
-                                select: {
-                                    id: true,
-                                    username: true,
-                                    email: true,
-                                    profile: true,
-                                },
-                            },
-                        },
-                    },
-                },
-            });
-
-            res.json(conversations);
-        } catch (error) {
-            res.status(500).json(CommandResult.failure("FAILED_TO_FETCH_CONVERSATIONS"));
-        }
-    },
-
     searchUsers: async (req: Request, res: Response) => {
         const { username } = req.query;
 
