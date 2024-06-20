@@ -2,6 +2,7 @@ import axiosInstance from "../api/axiosConfig.ts";
 import { UserProfile } from "../types/profileTypes.ts";
 import { FriendDTO } from "../pages/Friends/Friends.tsx";
 import { GameDTO, GamesInfoDTO } from "../pages/Games/Games.tsx";
+import { Conversation } from "../store/slices/messagesSlice.ts";
 
 export interface CommandResultFailure {
     isSuccess: false;
@@ -35,8 +36,8 @@ export const RestUtils = {
         removeFriend: (userId: number, friendId: number) => axiosInstance.delete<CommandResult>(`/friends/${userId}/remove/${friendId}`).then((data) => data.data),
     },
     Conversations: {
-        createConversation: (userId: number, userId2: number) =>
-            axiosInstance.post<CommandResult>(`/conversations/create`, { participants: [userId2, userId] }).then((data) => data.data),
+        getOrCreateConversation: (userId: number, userId2: number) =>
+            axiosInstance.post<Conversation | undefined>(`/conversations/create`, { participants: [userId2, userId] }).then((data) => data.data),
     },
     Games: {
         getGames: (count: number = 100, offset: number = 0, searchQuery?: string) =>

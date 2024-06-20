@@ -1,17 +1,32 @@
 import { prisma } from "../../index";
 
 export const ConversationService = {
-    createConversation: async (participants: number[]) => {
+    getOrCreateConversation: async (participants: number[]) => {
         //check if there is any conversation with these participants
-        const existingConversationsWithTheseParticipants = await prisma.conversation.findMany({ where: { participants: { every: { userId: { in: participants } } } } });
-        if (existingConversationsWithTheseParticipants.length > 0) {
-            return;
+        const existingConversationsWithTheseParticipants = await prisma.conversation.findFirst({ where: { participants: { every: { userId: { in: participants } } } } });
+        if (existingConversationsWithTheseParticipants) {
+            return existingConversationsWithTheseParticipants;
         }
 
         return prisma.conversation.create({
             data: {
                 participants: {
                     create: participants.map((userId) => ({ userId })),
+                },
+            },
+            include: {
+                messages: true,
+                participants: {
+                    include: {
+                        user: {
+                            select: {
+                                id: true,
+                                username: true,
+                                email: true,
+                                profile: true,
+                            },
+                        },
+                    },
                 },
             },
         });

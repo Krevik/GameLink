@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { RestUtils } from "../../../utils/RestUtils.ts";
 import { NotificationUtils } from "../../../utils/notificationUtils.ts";
 import { Button } from "primereact/button";
+import { Conversation, MessagesState, setAreMessagesOpen, setConversations, setSelectedConversationId } from "../../../store/slices/messagesSlice.ts";
+import store, { AppState } from "../../../store/store.ts";
+import { useSelector } from "react-redux";
 
 interface FriendCardProps {
     friendDTO: FriendDTO;
@@ -13,6 +16,7 @@ interface FriendCardProps {
 
 export const FriendCard = (props: FriendCardProps) => {
     const navigate = useNavigate();
+    const messagesState: MessagesState = useSelector((state: AppState) => state.messages);
 
     const handleFriendRemoval = async () => {
         const result = await RestUtils.Friends.removeFriend(props.friendDTO.senderId, props.friendDTO.receiverId);
@@ -22,9 +26,15 @@ export const FriendCard = (props: FriendCardProps) => {
         }
     };
 
-    const handleOpenConversation = () => {
-        RestUtils.Conversations.createConversation(props.friendDTO.senderId, props.friendDTO.receiverId);
-        //TODO open that particular conversations after creation
+    const handleOpenConversation = async () => {
+        const conversation: Conversation | undefined = await RestUtils.Conversations.getOrCreateConversation(props.friendDTO.senderId, props.friendDTO.receiverId);
+        if (conversation) {
+            if (!messagesState.conversations.find((conv) => conv.id === conversation.id)) {
+                store.dispatch(setConversations([...store.getState().messages.conversations, conversation]));
+            }
+            store.dispatch(setSelectedConversationId(conversation.id));
+            store.dispatch(setAreMessagesOpen(true));
+        }
     };
 
     return (
