@@ -1,19 +1,47 @@
 .message-bubble {
-    padding: 10px 15px;
-    border-radius: 20px;
+    display: flex;
+    align-items: flex-start;
     margin-bottom: 10px;
-    max-width: 60%;
-    word-wrap: break-word;
+    max-width: 70%;
 }
 
 .sender {
-    background-color: #4ca1af;
-    color: white;
     align-self: flex-end;
+    justify-content: flex-end;
 }
 
 .receiver {
-    background-color: #e0e0e0;
-    color: black;
     align-self: flex-start;
+}
+
+.message-content {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    &.sender {
+        background-color: #1e3a5f;
+    }
+
+    &.receiver {
+        background-color: #3f67b7;
+    }
+}
+
+.message-sender {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.message-text {
+    font-size: 14px;
+}
+
+.avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
 }

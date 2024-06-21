@@ -1,21 +1,26 @@
+.message-list-container {
+    max-height: 25rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+}
+
 .conversation-title {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    padding: 10px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+    border-radius: 10px 10px 0 0;
 }
 
-.conversation-title-body{
+.conversation-title-body {
     color: black;
     font-weight: bold;
-}
-
-.message-list-container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    position: relative;
 }
 
 .message-list {
@@ -26,7 +31,6 @@
     padding: 10px;
     background-color: #f4f4f9;
     border-radius: 10px;
-    max-height: 17rem;
 }
 
 .message-input-container {

@@ -2,10 +2,11 @@ import React, { ReactElement, useEffect, useRef, useState } from "react";
 import "./MessageList.css";
 import MessageBubble from "../MessageBubble/MessageBubble.tsx";
 import { Button } from "primereact/button";
-import { Conversation, Message } from "../../../store/slices/messagesSlice.ts";
+import { Conversation, Message, MessageUserData } from "../../../store/slices/messagesSlice.ts";
 import { useSelector } from "react-redux";
 import { AppState } from "../../../store/store.ts";
 import { Socket } from "socket.io-client";
+import { HOST_URL } from "../../../api/axiosConfig.ts";
 
 interface MessageListProps {
     conversationId: number;
@@ -46,9 +47,18 @@ const MessageList: React.FC<MessageListProps> = (props: MessageListProps) => {
         }
         return (
             <>
-                {messages.map((message) => (
-                    <MessageBubble key={message.id} content={message.content} isSender={message.senderId === props.userId} />
-                ))}
+                {messages.map((message) => {
+                    const sender: MessageUserData = props.currentConversation?.participants.find((participant) => participant.user.id === message.senderId)?.user;
+                    return (
+                        <MessageBubble
+                            key={message.id}
+                            content={message.content}
+                            isSender={message.senderId === props.userId}
+                            sender={sender?.username || "Unknown"}
+                            avatar={`${HOST_URL}${sender.profile?.avatarUrl}`} // Use a default avatar if none is provided
+                        />
+                    );
+                })}
             </>
         );
     };
