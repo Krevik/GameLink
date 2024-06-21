@@ -43,16 +43,28 @@ const messagesSlice = createSlice({
             state.selectedConversationId = action.payload;
         },
         setConversations(state, action: PayloadAction<Conversation[]>) {
-            state.conversations = action.payload;
+            state.conversations = getSortedConversations(action.payload);
         },
         addMessageToConversation(state, action: PayloadAction<{ message: Message }>) {
             const conversation = state.conversations.find((conversation) => conversation.id === action.payload.message.conversationId);
             if (conversation && !conversation.messages.find((message) => message.id === action.payload.message.id)) {
                 conversation.messages.push(action.payload.message);
             }
+            state.conversations = getSortedConversations(state.conversations);
         },
     },
 });
+
+const getSortedConversations = (conversations: Conversation[]): Conversation[] => {
+    return conversations.sort((a, b) => {
+        const lastMessageA = a.messages[a.messages.length - 1];
+        const lastMessageB = b.messages[b.messages.length - 1];
+        if (lastMessageA && lastMessageB) {
+            return new Date(lastMessageB.createdAt).getTime() - new Date(lastMessageA.createdAt).getTime();
+        }
+        return 0;
+    });
+};
 
 export const { setAreMessagesOpen, setSelectedConversationId, setConversations, addMessageToConversation } = messagesSlice.actions;
 

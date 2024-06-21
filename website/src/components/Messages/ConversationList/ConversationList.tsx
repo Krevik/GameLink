@@ -1,9 +1,10 @@
 import React from "react";
 import "./ConversationList.css";
-import { Conversation, setSelectedConversationId } from "../../../store/slices/messagesSlice.ts";
+import { Conversation } from "../../../store/slices/messagesSlice.ts";
 import { AppState } from "../../../store/store.ts";
 import { useSelector } from "react-redux";
-import { ListBox, ListBoxChangeEvent } from "primereact/listbox";
+import { Card } from "primereact/card";
+import { Button } from "primereact/button";
 
 interface ConversationListProps {
     userId: number;
@@ -19,11 +20,12 @@ const ConversationList: React.FC<ConversationListProps> = ({ userId, onSelectCon
     return (
         <div className="conversation-list-container">
             {conversations.map((conversation) => (
-                <>
-                    <div key={conversation.id} onClick={() => onSelectConversation(conversation.id)} className="conversation-list">
-                        {getConversationReceiverUserName(conversation)}
+                <Card key={conversation.id} className="conversation-card" onClick={() => onSelectConversation(conversation.id)}>
+                    <div className="conversation-content">
+                        <span>{getConversationReceiverUserName(conversation)}</span>
+                        <Button icon="pi pi-angle-right" className="p-button-rounded p-button-text" />
                     </div>
-                </>
+                </Card>
             ))}
         </div>
     );

@@ -1,3 +1,16 @@
+.conversation-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.conversation-title-body{
+    color: black;
+    font-weight: bold;
+}
+
 .message-list-container {
     display: flex;
     flex-direction: column;
@@ -55,4 +68,8 @@
     padding: 5px 10px;
     font-size: 12px;
     font-weight: bold;
+}
+
+.empty-conversation-message {
+    color: black;
 }

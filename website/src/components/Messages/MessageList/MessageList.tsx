@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 import "./MessageList.css";
 import MessageBubble from "../MessageBubble/MessageBubble.tsx";
-import axiosInstance from "../../../api/axiosConfig.ts";
 import { Button } from "primereact/button";
-import { Conversation } from "../../../store/slices/messagesSlice.ts";
+import { Conversation, Message } from "../../../store/slices/messagesSlice.ts";
 import { useSelector } from "react-redux";
 import { AppState } from "../../../store/store.ts";
 import { Socket } from "socket.io-client";
@@ -40,13 +39,28 @@ const MessageList: React.FC<MessageListProps> = (props: MessageListProps) => {
         }
     };
 
+    const getMessages = (): ReactElement => {
+        const messages: Message[] = props.currentConversation?.messages || [];
+        if (messages.length === 0) {
+            return <div className="empty-conversation-message">There are no messages in this conversation yet</div>;
+        }
+        return (
+            <>
+                {messages.map((message) => (
+                    <MessageBubble key={message.id} content={message.content} isSender={message.senderId === props.userId} />
+                ))}
+            </>
+        );
+    };
+
     return (
         <div className="message-list-container">
             <div className="conversation-title">
                 <Button icon="pi pi-chevron-left" onClick={() => props.onConversationIdSelect(undefined)} />
+                <div className="conversation-title-body">{props.currentConversation?.participants.filter((participant) => participant.user.id !== userId)[0].user.username}</div>
             </div>
             <div className="message-list" ref={containerRef}>
-                {props.currentConversation?.messages.map((message) => <MessageBubble key={message.id} content={message.content} isSender={message.senderId === props.userId} />)}
+                {getMessages()}
             </div>
             <div className="message-input-container">
                 <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} placeholder="Type a message..." />

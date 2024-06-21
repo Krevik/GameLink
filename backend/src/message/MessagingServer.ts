@@ -25,8 +25,10 @@ export const MessagingServer = {
 
 const registerUserConnectionSocketListener = (socket: Socket, server: Server) =>
     socket.on("user_connection", async (userId: number) => {
-        const sockets = await server.fetchSockets();
         //TODO we have currently doubling sockets, fix it and remove trytytka on front
+        if (userId === undefined) {
+            return;
+        }
         socket.join(userId.toString());
         serverLogger.info(`User connected: ${userId}`);
         const conversations = await ConversationFinder.getConversationsForUser(userId);
