@@ -1,30 +1,34 @@
 import Layout from "../../components/Layout/Layout.tsx";
-import React, { ReactElement, useEffect, useState } from "react";
-import { translate, translateAnything } from "../../utils/translation/TranslationUtils.ts";
-import { SexType, UserProfile } from "../../types/profileTypes.ts";
-import { RestUtils, UserProfileUpdateDTO } from "../../utils/RestUtils.ts";
-import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
-import { SelectItem } from "primereact/selectitem";
-import { InputTextarea } from "primereact/inputtextarea";
-import { UploadableProfilePicture } from "../../components/UploadableProfilePicture/UploadableProfilePicture.tsx";
-import { InputNumber } from "primereact/inputnumber";
-import { Card } from "primereact/card";
+import React, {ReactElement, useEffect, useRef, useState} from "react";
+import {translate, translateAnything} from "../../utils/translation/TranslationUtils.ts";
+import {SexType, UserProfile} from "../../types/profileTypes.ts";
+import {RestUtils, UserProfileUpdateDTO} from "../../utils/RestUtils.ts";
+import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
+import {SelectItem} from "primereact/selectitem";
+import {InputTextarea} from "primereact/inputtextarea";
+import {UploadableProfilePicture} from "../../components/UploadableProfilePicture/UploadableProfilePicture.tsx";
+import {InputNumber} from "primereact/inputnumber";
+import {Card} from "primereact/card";
 import styles from "./Profile.module.scss";
-import { InputText } from "primereact/inputtext";
-import { NotificationUtils } from "../../utils/notificationUtils.ts";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { AppState } from "../../store/store.ts";
-import { Chips, ChipsChangeEvent } from "primereact/chips";
+import {InputText} from "primereact/inputtext";
+import {NotificationUtils} from "../../utils/notificationUtils.ts";
+import {useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {AppState} from "../../store/store.ts";
+import {Chips, ChipsChangeEvent} from "primereact/chips";
+import {AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent} from "primereact/autocomplete";
+import {GamesInfoDTO} from "../Games/Games.tsx";
 
 export const Profile = () => {
     const [profile, setProfile] = useState<UserProfile | undefined>(undefined);
     const [isUpdateInProgress, setIsUpdateInProgress] = useState<boolean>(false);
+    const [suggestedGames, setSuggestedGames] = useState<GamesInfoDTO | undefined>(undefined);
+    const chipsRef = useRef<Chips | null>(null);
     const currentLoggedInUserId: number | null = useSelector((state: AppState) => state.auth.userId);
 
     const isMyProfile: boolean = currentLoggedInUserId === profile?.userId;
 
-    const { userId } = useParams();
+    const {userId} = useParams();
 
     useEffect(() => {
         userId && loadUserProfile(Number(userId));
@@ -44,7 +48,7 @@ export const Profile = () => {
 
     //function for stripping id out of userProfile object
     const getUserProfileWithoutId = (userProfile: UserProfile): UserProfileUpdateDTO => {
-        const { id, userId, ...rest } = userProfile;
+        const {id, userId, ...rest} = userProfile;
         return rest;
     };
 
@@ -65,7 +69,7 @@ export const Profile = () => {
     };
 
     const onSexChange = (event: DropdownChangeEvent) => {
-        const updatedProfile: UserProfile = { ...profile, userId: Number(userId) };
+        const updatedProfile: UserProfile = {...profile, userId: Number(userId)};
         updatedProfile.sex = event.target.value;
         updateUserProfile(updatedProfile);
     };
@@ -73,7 +77,8 @@ export const Profile = () => {
     const getSexFieldElement = (): ReactElement => (
         <div className={styles.profileField}>
             <label>Sex</label>
-            <Dropdown disabled={isUpdateInProgress || !isMyProfile} value={profile?.sex} options={sexSelectOptions} onChange={onSexChange} />
+            <Dropdown disabled={isUpdateInProgress || !isMyProfile} value={profile?.sex} options={sexSelectOptions}
+                      onChange={onSexChange}/>
         </div>
     );
 
@@ -159,24 +164,27 @@ export const Profile = () => {
         </div>
     );
 
+    const updateSuggestedGames = async (event: AutoCompleteCompleteEvent) => {
+        const games: GamesInfoDTO = await RestUtils.Games.getGames(100, 0, event.query);
+        setSuggestedGames(games);
+    }
+
+    const getSuggestedGamesOptions: string[] = suggestedGames?.games.map(game => game.name) ?? [];
+
     const getFavouriteGamesFieldElement = (): ReactElement => (
         <div className={styles.profileField}>
             <label>Favourite Games</label>
-            <Chips
-                tooltip={"Use comma for separating games"}
-                separator={","}
-                disabled={!isMyProfile}
-                value={profile?.favouriteGames}
-                onBlur={() => updateUserProfile(profile!)}
-                onChange={(event: ChipsChangeEvent) =>
-                    setProfile({
-                        ...profile,
-                        userId: Number(userId),
-                        favouriteGames: event.target.value,
-                    })
-                }
-                className={styles.pInputtext}
-            />
+            <AutoComplete disabled={!isMyProfile} multiple value={profile?.favouriteGames}
+                          suggestions={getSuggestedGamesOptions}
+                          completeMethod={updateSuggestedGames} onChange={(event: AutoCompleteChangeEvent) =>
+                setProfile({
+                    ...profile,
+                    userId: Number(userId),
+                    favouriteGames: event.target.value,
+                })
+            }
+                          onBlur={() => updateUserProfile(profile!)}
+                          forceSelection/>
         </div>
     );
 
@@ -185,7 +193,9 @@ export const Profile = () => {
             <div className={styles.profileContainer}>
                 <Card title={translate("MY_PROFILE")} className={styles.profileCard}>
                     <div className={styles.profileContent}>
-                        <UploadableProfilePicture avatarFileName={profile?.avatarUrl} onNewAvatarUploaded={() => loadUserProfile(Number(userId))} editionEnabled={isMyProfile} />
+                        <UploadableProfilePicture avatarFileName={profile?.avatarUrl}
+                                                  onNewAvatarUploaded={() => loadUserProfile(Number(userId))}
+                                                  editionEnabled={isMyProfile}/>
                         <div className={styles.profileDetails}>
                             <div className={styles.detailsRow}>
                                 {getSexFieldElement()}

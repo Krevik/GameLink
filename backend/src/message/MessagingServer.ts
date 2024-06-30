@@ -26,7 +26,7 @@ export const MessagingServer = {
 const registerUserConnectionSocketListener = (socket: Socket, server: Server) =>
     socket.on("user_connection", async (userId: number) => {
         //TODO we have currently doubling sockets, fix it and remove trytytka on front
-        if (userId === undefined) {
+        if (userId === undefined || userId === null || !userId.toString()) {
             return;
         }
         socket.join(userId.toString());

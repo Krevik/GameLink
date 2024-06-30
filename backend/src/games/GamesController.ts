@@ -33,6 +33,7 @@ export const GamesController = {
                 take: Number(finalCount),
                 where: {
                     name: {
+                        mode: "insensitive",
                         contains: finalQuery,
                     },
                 },
