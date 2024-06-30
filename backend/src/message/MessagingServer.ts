@@ -52,6 +52,9 @@ const registerMessageSentSocketListener = (socket: Socket) =>
                         },
                     },
                 },
+                include: {
+                    readReceipts: true,
+                }
             });
             event.receiverIds.forEach((receiverId) => {
                 socket.to(receiverId.toString()).emit("message_received", message);

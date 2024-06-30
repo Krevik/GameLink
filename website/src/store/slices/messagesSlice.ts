@@ -19,6 +19,7 @@ export interface Message {
     receiverId: number;
     createdAt: string;
     conversationId: number;
+    readReceipts: Array<{ userId: number, readAt?: string }>;
 }
 
 export interface MessagesState {

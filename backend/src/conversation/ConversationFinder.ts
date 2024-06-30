@@ -1,11 +1,12 @@
-import { Request, Response } from "express";
-import { prisma } from "../../index";
-import { CommandResult } from "../utils/CommandResult";
+import {prisma} from "../../index";
+import Logger from "../Logger/Logger";
+
+const logger = new Logger("ConversationFinder");
 
 export const ConversationFinder = {
     getConversationsForUser: async (userId: number) => {
         try {
-            const conversations = await prisma.conversation.findMany({
+            return await prisma.conversation.findMany({
                 where: {
                     participants: {
                         some: {
@@ -18,6 +19,9 @@ export const ConversationFinder = {
                         orderBy: {
                             createdAt: "asc",
                         },
+                        include: {
+                            readReceipts: true,
+                        }
                     },
                     participants: {
                         include: {
@@ -33,10 +37,9 @@ export const ConversationFinder = {
                     },
                 },
             });
-
-            return conversations;
         } catch (error) {
-            //TODO error logging
+            logger.error(`Error while fetching conversations for user ${userId}: ${error}`);
+            return Promise.resolve([]);
         }
     },
 };

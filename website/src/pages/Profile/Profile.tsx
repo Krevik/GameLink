@@ -215,7 +215,7 @@ export const Profile = () => {
                                 {getAgeFieldElement()}
                             </div>
                             {getBioFieldElement()}
-                            {getFavouritePlatformFieldElement()}
+                            {/*{getFavouritePlatformFieldElement()}*/}
                             {getAvailablePlatformsFieldElement()}
                             {getFavouriteGamesFieldElement()}
                         </div>
