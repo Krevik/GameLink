@@ -44,7 +44,7 @@ export const GamesController = {
             };
             res.json(responseDTO);
         } catch (error) {
-            res.status(500).json(CommandResult.failure("ERROR_GETTING_CONVERSATION"));
+            res.status(500).json(CommandResult.failure("ERROR_GETTING_GAMES"));
         }
-    },
+    }
 };

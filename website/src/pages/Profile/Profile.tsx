@@ -2,7 +2,7 @@ import Layout from "../../components/Layout/Layout.tsx";
 import React, {ReactElement, useEffect, useRef, useState} from "react";
 import {translate, translateAnything} from "../../utils/translation/TranslationUtils.ts";
 import {SexType, UserProfile} from "../../types/profileTypes.ts";
-import {RestUtils, UserProfileUpdateDTO} from "../../utils/RestUtils.ts";
+import {GamePlatformDTO, RestUtils, UserProfileUpdateDTO} from "../../utils/RestUtils.ts";
 import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
 import {SelectItem} from "primereact/selectitem";
 import {InputTextarea} from "primereact/inputtextarea";
@@ -23,12 +23,17 @@ export const Profile = () => {
     const [profile, setProfile] = useState<UserProfile | undefined>(undefined);
     const [isUpdateInProgress, setIsUpdateInProgress] = useState<boolean>(false);
     const [suggestedGames, setSuggestedGames] = useState<GamesInfoDTO | undefined>(undefined);
-    const chipsRef = useRef<Chips | null>(null);
+    const [platforms, setPlatforms] = useState<GamePlatformDTO[]>([]);
+    const [suggestedPlatforms, setSuggestedPlatforms] = useState<string[]>([]);
     const currentLoggedInUserId: number | null = useSelector((state: AppState) => state.auth.userId);
 
     const isMyProfile: boolean = currentLoggedInUserId === profile?.userId;
 
     const {userId} = useParams();
+
+    useEffect(() => {
+        RestUtils.Platforms.getPlatforms(400, 0).then(setPlatforms);
+    }, []);
 
     useEffect(() => {
         userId && loadUserProfile(Number(userId));
@@ -52,7 +57,13 @@ export const Profile = () => {
         return rest;
     };
 
-    const updateUserProfile = (userProfile: UserProfile) => {
+    const updateUserProfile = async (userProfile: UserProfile) => {
+        const profileOnServer = await RestUtils.Profile.getByUserId(Number(userId));
+        if(JSON.stringify(profileOnServer) === JSON.stringify(userProfile)){
+            //profile is the same as on server, no need to update
+            return;
+        }
+
         setIsUpdateInProgress(true);
         RestUtils.Profile.updateProfile(Number(userId), getUserProfileWithoutId(userProfile))
             .then((result) => {
@@ -143,24 +154,26 @@ export const Profile = () => {
         </div>
     );
 
+    const updateSuggestedPlatforms = async (event: AutoCompleteCompleteEvent) => {
+        const matchingPlatforms: string[] = platforms.filter(platform => platform.name.match(event.query)).map(platform => platform.name);
+        setSuggestedPlatforms(matchingPlatforms);
+    }
+
     const getAvailablePlatformsFieldElement = (): ReactElement => (
         <div className={styles.profileField}>
             <label>Available Platforms</label>
-            <Chips
-                tooltip={"Use comma for separating platforms"}
-                separator={","}
-                disabled={!isMyProfile}
-                value={profile?.availablePlatforms}
-                onBlur={() => updateUserProfile(profile!)}
-                onChange={(event: ChipsChangeEvent) =>
-                    setProfile({
-                        ...profile,
-                        userId: Number(userId),
-                        availablePlatforms: event.target.value,
-                    })
-                }
-                className={styles.pInputtext}
-            />
+            <AutoComplete disabled={!isMyProfile} multiple value={profile?.availablePlatforms}
+                          suggestions={suggestedPlatforms}
+                          completeMethod={updateSuggestedPlatforms}
+                          onChange={(event: AutoCompleteChangeEvent) =>
+                setProfile({
+                    ...profile,
+                    userId: Number(userId),
+                    availablePlatforms: event.target.value,
+                })
+            }
+                          onBlur={() => updateUserProfile(profile!)}
+                          forceSelection/>
         </div>
     );
 

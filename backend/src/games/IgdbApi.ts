@@ -1,4 +1,5 @@
 import { prisma } from "../../index";
+import {Platform} from "@prisma/client";
 
 //TODO move to .env
 const client_id = "sayvwm88hylj3u74yngs9eywjovaqc";
@@ -59,6 +60,17 @@ const getCoversInfo = (offset: number = 0, limit: number = 10) =>
         body: `fields game,image_id,url;limit ${limit};offset ${offset};`,
     });
 
+const getPlatformsInfo = (offset: number = 0, limit: number = 10) =>
+    fetch("https://api.igdb.com/v4/platforms", {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Client-ID": client_id,
+            Authorization: `Bearer ${authInfo?.access_token}`,
+        },
+        body: `fields name,platform_logo;limit ${limit};offset ${offset};`,
+    });
+
 const loadGamesInfo = async (limit: number = 400, offset: number = 0) => {
     const gamesInfoRaw = await getGamesInfo(offset, limit);
     const gamesInfo: GameInfo[] = await gamesInfoRaw.json();
@@ -105,6 +117,22 @@ const loadAuthInfo = async () => {
     }
 };
 
+const updatePlatforms = async (limit: number = 400, offset: number = 0) => {
+    const gamePlatformsRaw = await getPlatformsInfo(offset, limit);
+    const gamePlatforms: Platform[] = await gamePlatformsRaw.json();
+    if (gamePlatforms.length === 0) {
+        console.log("Finished fetching game platforms");
+        return;
+    }
+    let updatePromises: Promise<any>[] = [];
+    gamePlatforms.forEach((platform) => {
+        updatePromises.push(prisma.platform.upsert({ where: { id: platform.id }, create: { ...platform }, update: { ...platform } }));
+    });
+    await Promise.all(updatePromises);
+    console.log(`offset: ${offset} limit: ${limit} gamePlatforms.length: ${gamePlatforms.length}`);
+    await updatePlatforms(limit, offset + gamePlatforms.length);
+}
+
 export const IgdbApi = {
     updateGameInfos: async () => {
         loadAuthInfo().then(() =>
@@ -115,4 +143,11 @@ export const IgdbApi = {
             }),
         );
     },
+    updatePlatforms: async () => {
+        loadAuthInfo().then(() =>
+            updatePlatforms().then(() => {
+                authInfo = undefined;
+            }),
+        );
+    }
 };

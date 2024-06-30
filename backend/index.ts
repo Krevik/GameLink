@@ -15,6 +15,7 @@ import { FriendsRouter } from "./src/friends/FriendsRouter";
 import { IgdbApi } from "./src/games/IgdbApi";
 import { GamesRouter } from "./src/games/GamesRouter";
 import { MessagingServer } from "./src/message/MessagingServer";
+import {PlatformsRouter} from "./src/platforms/GamePlatformsRouter";
 const cors = require("cors");
 
 export const prisma = new PrismaClient();
@@ -28,6 +29,7 @@ serverApp.use("/users", userRouter);
 serverApp.use("/games", GamesRouter);
 serverApp.use("/profiles", profileRouter);
 serverApp.use("/conversations", ConversationRouter);
+serverApp.use("/platforms", PlatformsRouter);
 serverApp.use("/messages", messageRouter);
 serverApp.use("/auth", authRouter);
 serverApp.use("/uploads", express.static(path.join(__dirname, "uploads")));
@@ -96,9 +98,13 @@ serverApp.listen(PORT, async () => {
     console.log(`Initial setup finished`);
     setInterval(async () => {
         IgdbApi.updateGameInfos();
+        IgdbApi.updatePlatforms();
     }, gamesInfoFetchingInterval);
     if ((await prisma.gameInfo.count()) < 10) {
-        IgdbApi.updateGameInfos();
+        await IgdbApi.updateGameInfos();
+    }
+    if((await prisma.platform.count()) < 10) {
+        await IgdbApi.updatePlatforms();
     }
     MessagingServer.setupServer();
 });

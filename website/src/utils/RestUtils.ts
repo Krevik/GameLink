@@ -14,6 +14,11 @@ export interface CommandResultSuccess {
     message: never;
 }
 
+export interface GamePlatformDTO {
+    id: number;
+    name: string;
+}
+
 export type UserProfileUpdateDTO = Omit<UserProfile, "id" | "userId">;
 
 export type CommandResult = CommandResultFailure | CommandResultSuccess;
@@ -41,6 +46,9 @@ export const RestUtils = {
     },
     Games: {
         getGames: (count: number = 100, offset: number = 0, searchQuery?: string) =>
-            axiosInstance.get<GamesInfoDTO>(`/games/${offset}/${count}/${searchQuery}`).then((data) => data.data),
+            axiosInstance.get<GamesInfoDTO>(`/games/${offset}/${count}/${searchQuery}`).then((data) => data.data)
     },
+    Platforms: {
+        getPlatforms: (count: number = 400, offset: number = 0) => axiosInstance.get<GamePlatformDTO[]>(`/platforms/${offset}/${count}`).then((data) => data.data)
+    }
 };
